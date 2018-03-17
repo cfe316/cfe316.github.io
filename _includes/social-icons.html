@@ -3,6 +3,11 @@
   {% if first_char == '/' %}
     <a href="{{ site.baseurl }}{{ item.link }}"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
   {% else %}
-    <a href="{{ item.link }}" target="_blank"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
+    {% if item.icon == 'orcid' %}
+     <a href="{{ item.link }}" target="orcid.widget" rel="noopener noreferrer"><i class="ai ai-{{ item.icon }}" aria-hidden="true"></i></a>
+    {% else %}
+     <a href="{{ item.link }}" target="_blank"><i class="fa fa-{{ item.icon }}" aria-hidden="true"></i></a>
+    {% endif %}
   {% endif %}
 {% endfor %}
+<!--<a href="https://orcid.org/0000-0001-9636-8181" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>-->
