@@ -1,16 +1,36 @@
 ---
 layout: default
-title: Jacob Schwartz
+title: Home
 ---
-<h3>Academic work</h3>
-<p>My thesis work is on developing a piece of technology with application for nuclear fusion reactors.</p>
 
-<p>A link to papers I've contributed to, on ORCID:
-<a href="https://orcid.org/0000-0001-9636-8181" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon">orcid.org/0000-0001-9636-8181</a>
-</p>
+{% for post in paginator.posts %}
+<div class="posts">
+  <h1>
+    <a href="{{ site.github.url }}{{ post.url }}">{{ post.title }}</a>
+  </h1>
+  {% if post.image %}
+  <div class="thumbnail-container">
+    <a href="{{ site.github.url }}{{ post.url }}"><img src="{{ site.github.url }}/assets/img/{{ post.image }}"></a>
+  </div>
+  {% endif %}
+  <p>
+    {{ post.content | strip_html | truncate: 350 }} <a href="{{ site.github.url }}{{ post.url }}">Read more</a>
+    <span class="post-date"><i class="fa fa-calendar" aria-hidden="true"></i> {{ post.date | date_to_string }} - <i class="fa fa-clock-o" aria-hidden="true"></i> {% include read-time.html %}</span>
+  </p>
+</div>
+{% endfor %}
 
-<h3>Social media</h3>
-<ul>
-	<li><a href="https://www.linkedin.com/in/jacob-schwartz-293a66132">LinkedIn</a></li>
-	<li><a href="https://github.com/cfe316">github/cfe316</a></li>
-</ul>
+<!-- Pagination links -->
+<div class="pagination">
+  {% if paginator.next_page %}
+    <a class="pagination-button pagination-active" href="{{ site.github.url }}{{ paginator.next_page_path }}" class="next">{{ site.data.settings.pagination.previous_page }}</a>
+  {% else %}
+    <span class="pagination-button">{{ site.data.settings.pagination.previous_page }}</span>
+  {% endif %}
+
+  {% if paginator.previous_page %}
+    <a class="pagination-button pagination-active" href="{{ site.baseurl }}{{ paginator.previous_page_path }}">{{ site.data.settings.pagination.next_page }}</a>
+  {% else %}
+    <span class="pagination-button">{{ site.data.settings.pagination.next_page }}</span>
+  {% endif %}
+</div>

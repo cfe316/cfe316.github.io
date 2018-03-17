@@ -1,34 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="description" content="A simple website">
-	<title>{{ page.title }}</title>
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
-</head>
+<!doctype html>
+<html>
+
+{% include head.html %}
+
 <body>
-<header>
-<h1>Jacob Schwartz</h1>
-<h2>Scientist &amp; HTML fan</h2>
-</header>
-<hr>
-<main>
 
-{{ content }}
+  <div class="container">
+    {% include header.html %}
 
-</main>
+    <div class="post-container">
+      {{ content }}
+    </div>
 
-<footer>
-<hr>
-<blockquote>
-<p>&quot;It is not incumbent upon you to complete the work, but neither are you at liberty to desist from it.&quot;
-<img style="float:right" src="/images/construction.gif" alt="under construction">
-</p>
-<footer>
-<cite>Pirke Avot 2:21</cite>
-</footer>
-</blockquote>
+    {% include footer.html %}
 
-</footer>
+  </div>
+
 </body>
 </html>
