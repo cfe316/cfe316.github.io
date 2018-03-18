@@ -3,6 +3,8 @@ paginate:            5
 
 # Build settings
 title: Jacob Schwartz
+author: Jacob Schwartz
+description: 'Scientist &amp; HTML fan'
 markdown:            kramdown
 highlighter:         rouge
 permalink:           none
