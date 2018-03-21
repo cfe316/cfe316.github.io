@@ -5,6 +5,7 @@ author: "Paul Le"
 categories: journal
 tags: [documentation,sample]
 image: cards.jpg
+use_math: true
 ---
 
 # Markdown Support
