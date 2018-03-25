@@ -16,13 +16,10 @@ First we will draw a free-body diagram for this problem, then give the equations
 Then, in order to give a more universal formula, we will normalize the velocity and time variables to the final orbital parameters.
 We will solve the differential equation for velocity as a function of time, and then determine the required delta-v to make orbit as a function of $\twr$. A brief discussion and list of future work follows.
 ## Free-body diagram
-<figure>
-<img src="{{ site.github.url }}/assets/img/freebody.svg">
-<figcaption>Figure 1: Free body diagram of the rocket.
+{% include figure.html url="freebody.svg" 
+caption="Figure 1: Free body diagram of the rocket.
 Centrifugal force $F_c = m v^2/R$ points outward, thrust points upward and to the right at angle $\theta$, and gravity is downward.
-Acceleration is to the right, horizontally.
-</figcaption>
-</figure>
+Acceleration is to the right, horizontally." %}
 
 ## The equations of motion
 
@@ -80,11 +77,9 @@ Finally, just multiply the time required by $\twr$ to get $\Delta \vn$.
 \end{equation}
 
 ## Results
-
-<figure>
-<img src="{{ site.github.url }}/assets/img/TWRdeltaVplot.png">
-<figcaption>Required delta-v as a function of $\twr$, normalized to the final orbital velocity, as given by Equation $(\ref{eq:dvtwr})$.</figcaption>
-</figure>
+{% include figure.html url="TWRdeltaVplot.png"
+caption="Required delta-v as a function of $\twr$, normalized to the final orbital velocity, as given by Equation $(\ref{eq:dvtwr})$."
+%}
 
 Results are shown in the above plot.
 
@@ -95,3 +90,7 @@ For a typical $\twr$ of 2, the penalty over an impulsive maneuver is only 8%. Fo
 ## Discussion
 While having a $\twr$ of 2 is a convenient rule of thumb for making orbit, it is not a requirement. Some missions may achieve greater capabilities using a lighter engine with less thrust, if the gains in total $\Delta \vn$ offset the loss due to lower $\twr$. 
 
+## Future work
+* Identify payload ranges and engines that would allow greater capabilites despite a lower $\twr$.
+* Extend modelling to include the increase in $\twr$ as fuel is consumed.
+* Determine optimal trajectories from the surface to a non-zero-altitude orbit, given constant $\twr$ or $\twr$ as a function of time.
