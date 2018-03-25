@@ -5,6 +5,7 @@
     Masthead
     Thumbnail
     Post
+    Figure
     Pagination
     Footer
     Menu
@@ -155,6 +156,12 @@ hr {
   color: #9a9a9a;
   font-family: 'Quattrocento Sans', sans-serif;
   font-size:0.8rem;
+}
+
+.post-figure img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 30rem) {
