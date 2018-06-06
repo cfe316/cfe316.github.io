@@ -16,8 +16,11 @@ A particle is emitted from a uniform random location inside an infinite tube and
 
 where the inner radius of the tube is $1$, the outer radius is $r$, $K$ and $E$ are the complete [elliptic integrals](https://en.wikipedia.org/wiki/Elliptic_integral) of the [first kind](http://mathworld.wolfram.com/CompleteEllipticIntegraloftheFirstKind.html) and [second kind](http://mathworld.wolfram.com/CompleteEllipticIntegraloftheSecondKind.html), respectively.
 
-### For thin-wall tubes
-In the limit of a thin wall tube, the expression simplifies considerably: \\[ \lim_{(r-1) \to 0} \overline{d} \to 2(r-1) \\]
+### Asymptotics
+#### For thin-wall tubes
+In the limit of a tube with outer radius $1+\epsilon$, the expression becomes : \\[ \lim_{r \to 1+\epsilon} \overline{d} \to 2 \epsilon + \frac{1}{4} \epsilon ^2 (2 \log (\epsilon )+5-6 \log (2))\\]
+#### For thick-wall tubes
+In the limit of a thick wall tube, $r \gg 1 $, the leading terms are: \\[ \lim_{r \to \infty} \overline{d} \to \frac{\pi}{2} r - \frac{4}{3} \\]
 
 ## Explanation
 
