@@ -33,6 +33,8 @@ We can perform this in two coordinate systems: first, a more complicated calcula
 
 A second calculation is a bit simpler because it can more easily be broken up into factors.
 
+$$ \overline{d} = \frac{\pi}{2} * \frac{4}{\pi} = 2 $$
+
 The first factor is the average distance the particles travel through the cylinder, perpendicular to the axis. The second factor is the average distance multiplier due to particles' velocity along the axis.
 
 ## First factor, perpendicular to the axis
@@ -42,7 +44,8 @@ See Figure 1. A particle encountering the cylinder does so with a particular imp
 {% include figure.html url="through_circle.svg" 
 caption="Figure 1: Particles passing through a circular slice of a cylinder." %}
 
-Since the particle bath is uniform and isotropic, the distribution of $b$ is uniform between -1 and 1. Using the formula for a circle in cartesian coordinates, $h = 2 \sqrt{1 - b^2}$. Taking the average over $h$ over all the $b$:
+Since the particle bath is uniform and isotropic, the distribution of $b$ is uniform between -1 and 1. 
+Find $h$ as a function of $b$: using the formula for a circle in cartesian coordinates, $h = 2 \sqrt{1 - b^2}$. Taking the average over $h$ over all the $b$:
 
 $$ \overline{h} =  \frac{\int_{-1}^1 2\sqrt{1- b^2} \; db}{\int_{-1}^{1} \;db} = \frac{\pi}{2} $$
 
@@ -56,12 +59,15 @@ Particles that will encounter the cylinder do so proportional to their velocity 
 
 $$f_\text{hit}(\theta) \propto \sin^2 \theta$$
 
-The $d$ for a particle with a given impact parameter multiplied by $1/\sin\theta$.
+{% include figure.html url="axial_factor_outlined.svg" 
+caption="Figure 2: Particles passing through a length ." %}
+See Figure 2.
+The $d$ for a particle moving through the cylinder at an angle $\theta$ is multiplied by $1/\sin\theta$ compared to if it had $\theta = \pi/2$.
 
-The average axial factor is 
+So, the average axial factor is 
 
-$$ \frac{\int_{0}^\pi \frac{1}{\sin\theta} \sin^2 \theta \; d \theta}{\int_0^\pi \sin^2 \theta \; d \theta} = \frac{4}{\pi} $$
+$$ \overline{a} = \frac{\int_{0}^\pi \frac{1}{\sin\theta} \sin^2 \theta \; d \theta}{\int_0^\pi \sin^2 \theta \; d \theta} = \frac{4}{\pi} $$
 
 The solution is the product of the perpendicular distance and axial factor:
 
-\\[ \frac{\pi}{2} \frac{4}{\pi} = 2 \tag{1} \\]
+\\[ \overline{d} = \overline{h} * \overline{a} = \frac{\pi}{2} \frac{4}{\pi} = 2 \tag{1} \\]
