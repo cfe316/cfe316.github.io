@@ -3,3 +3,7 @@ Gemfile.lock
 .sass-cache
 .jekyll-metadata
 .DS_Store
+
+assets/img/cylinder_integral_coordinates.pdf
+assets/img/lines_through_cylinder.pdf
+

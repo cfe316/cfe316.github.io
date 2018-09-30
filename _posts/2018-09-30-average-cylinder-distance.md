@@ -2,7 +2,7 @@
 layout: post
 title: "Particles passing through an infinite cylinder"
 author: "Jacob Schwartz"
-categories: journal
+categories: blog
 tags: [integrals]
 image: lines_through_cylinder.png
 use_math: true
