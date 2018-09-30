@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="640px"
+   height="364px"
+   viewBox="0 0 640 364"
+   enable-background="new 0 0 640 364"
+   xml:space="preserve"
+   sodipodi:docname="cylinder_distance_phi.svg"
+   inkscape:version="0.92.3 (unknown)"><metadata
+   id="metadata1637"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
+   id="defs1635"><marker
+     inkscape:stockid="Arrow1Lend"
+     orient="auto"
+     refY="0.0"
+     refX="0.0"
+     id="Arrow1Lend"
+     style="overflow:visible;"
+     inkscape:isstock="true"><path
+       id="path835"
+       d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+       style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;stroke-opacity:1;fill:#000000;fill-opacity:1"
+       transform="scale(0.8) rotate(180) translate(12.5,0)" /></marker></defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1366"
+   inkscape:window-height="718"
+   id="namedview1633"
+   showgrid="false"
+   inkscape:zoom="1.1623068"
+   inkscape:cx="341.73788"
+   inkscape:cy="210.61764"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1"
+   inkscape:snap-bbox="true"
+   inkscape:snap-intersection-paths="true" />
+<path
+   fill="#FFFFFF"
+   stroke="#000000"
+   stroke-width="3.2658"
+   stroke-miterlimit="10"
+   d="M557.137,181.191  c0,79.703-64.61,144.316-144.317,144.316c-79.703,0-144.316-64.613-144.316-144.316c0-79.706,64.613-144.318,144.316-144.318  C492.526,36.873,557.137,101.485,557.137,181.191z"
+   id="path1550"
+   style="stroke-width:1.33333333;stroke-miterlimit:10;stroke-dasharray:none" />
+
+<g
+   id="g1570">
+	<g
+   id="g1568">
+		<line
+   fill="none"
+   stroke="#000000"
+   stroke-width="3"
+   stroke-miterlimit="10"
+   x1="635"
+   y1="181.5"
+   x2="625"
+   y2="181.5"
+   id="line1562" />
+		
+			<line
+   fill="none"
+   stroke="#000000"
+   stroke-width="3"
+   stroke-miterlimit="10"
+   stroke-dasharray="19,19"
+   x1="606"
+   y1="181.5"
+   x2="46"
+   y2="181.5"
+   id="line1564" />
+		<line
+   fill="none"
+   stroke="#000000"
+   stroke-width="3"
+   stroke-miterlimit="10"
+   x1="37"
+   y1="181.5"
+   x2="27"
+   y2="181.5"
+   id="line1566" />
+	</g>
+</g>
+
+
+
+
+
+
+
+
+<path
+   style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.66666667;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;marker-end:url(#Arrow1Lend)"
+   d="M 268.28897,180.88213 478.17489,52.517118"
+   id="path830"
+   inkscape:connector-curvature="0" /><flowRoot
+   xml:space="preserve"
+   id="flowRoot1120"
+   style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Sans;font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+     id="flowRegion1122"><rect
+       id="rect1124"
+       width="47.452469"
+       height="54.75285"
+       x="353.46005"
+       y="120.654" /></flowRegion><flowPara
+     id="flowPara1126"></flowPara></flowRoot><g
+   aria-label="φ"
+   style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+   id="text1130"><path
+     d="m 371.12807,152.44792 c -0.92,-5.72 -6.04,-7.56 -10.96,-7.52 0.12,-3 0.24,-6.04 0.68,-9.04 l -0.32,-0.24 c -0.52,0.2 -1.04,0.48 -1.56,0.84 l 0.08,8.44 c -6.8,-0.04 -12.2,4.24 -11.04,11.52 0.92,5.92 5.96,7.72 11.04,8.04 v 10.56 l 0.44,0.36 c 0.72,-0.28 1.36,-0.6 1.88,-1.12 -0.56,-3.28 -0.92,-6.52 -1.08,-9.8 7.2,-0.52 12.08,-4.12 10.84,-12.04 z m -3.24,0.48 c 0.92,5.72 -1.68,10.48 -7.64,10.68 l -0.08,-17.72 c 4.4,0.08 7.04,2.76 7.72,7.04 z m -8.84,-7.04 -0.04,17.76 c -4.68,-0.36 -7.04,-2.72 -7.76,-7.28 -0.92,-5.96 1.68,-10.28 7.8,-10.48 z"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Asana Math';-inkscape-font-specification:'Asana Math, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
+     id="path1223" /></g><path
+   style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:1.33333333;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+   d="m 393.65202,104.81227 c 13.48607,22.17748 21.25292,48.21665 21.25292,76.06986"
+   id="path1136"
+   inkscape:connector-curvature="0"
+   sodipodi:nodetypes="cc" /><path
+   style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.33333333;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+   d="M 414.90494,180.88213 478.17489,52.517118"
+   id="path1141"
+   inkscape:connector-curvature="0" /><path
+   style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+   d="M 414.90494,180.88213 H 268.28897"
+   id="path1155"
+   inkscape:connector-curvature="0" /><g
+   aria-label="1"
+   transform="translate(-7.3003801,-12.1673)"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Asana Math';-inkscape-font-specification:'Asana Math, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+   id="flowRoot1157"><path
+     d="m 351.92898,229.99277 v -1.2 l -2.08,-0.12 c -2.2,-0.12 -2.6,-0.56 -2.6,-2.64 v -23.72 l -0.56,-0.2 c -2.6,1.36 -5.44,2.56 -9.08,3.84 l 0.28,1.72 h 0.4 l 5.28,-2.36 c 0.24,0 0.32,0.36 0.32,1.32 v 19.4 c 0,2.08 -0.44,2.52 -2.6,2.64 l -2.24,0.12 v 1.2 c 6.16,-0.12 6.16,-0.12 6.6,-0.12 1.24,0 5.64,0.12 6.28,0.12 z"
+     style=""
+     id="path1217" /></g><g
+   aria-label="1"
+   transform="translate(118.02281,-90.646386)"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Asana Math';-inkscape-font-specification:'Asana Math, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+   id="flowRoot1179"><path
+     d="m 351.92898,229.99277 v -1.2 l -2.08,-0.12 c -2.2,-0.12 -2.6,-0.56 -2.6,-2.64 v -23.72 l -0.56,-0.2 c -2.6,1.36 -5.44,2.56 -9.08,3.84 l 0.28,1.72 h 0.4 l 5.28,-2.36 c 0.24,0 0.32,0.36 0.32,1.32 v 19.4 c 0,2.08 -0.44,2.52 -2.6,2.64 l -2.24,0.12 v 1.2 c 6.16,-0.12 6.16,-0.12 6.6,-0.12 1.24,0 5.64,0.12 6.28,0.12 z"
+     style=""
+     id="path1220" /></g><g
+   aria-label="c"
+   transform="translate(20.802351,-125.06071)"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Asana Math';-inkscape-font-specification:'Asana Math, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+   id="flowRoot1187"><path
+     d="m 351.16898,217.43277 c 0,-1.84 0.2,-3.48 0.56,-4.92 -1.28,-1.76 -3,-2.52 -4.84,-2.52 -4.92,0 -10.68,5.48 -10.68,10.96 0,0.16 0,0.36 0.04,0.52 0,5.4 3.8,9.2 9.16,9.2 2.08,0 5.08,-0.76 5.48,-1.36 l 0.84,-1.28 -0.4,-0.6 c -1.48,0.8 -2.76,1.16 -4.2,1.16 -4.44,0 -7.36,-3.44 -7.36,-8.72 0,-4.28 2,-6.68 5.6,-6.68 1.76,0 3.68,0.8 4.4,1.8 l 0.28,2.44 z"
+     style=""
+     id="path1208" /></g></svg>
