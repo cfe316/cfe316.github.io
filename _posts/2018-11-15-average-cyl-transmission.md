@@ -3,7 +3,7 @@ layout: post
 title: "Chance of particles passing through a cylinder without interacting"
 author: "Jacob Schwartz"
 categories: blog
-tags: [integrals]
+tags: [integrals, distribution]
 image: decay_through_cylinder.png
 use_math: true
 ---

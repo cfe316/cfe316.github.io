@@ -3,7 +3,7 @@ layout: post
 title: "Particles passing through an infinite cylinder"
 author: "Jacob Schwartz"
 categories: blog
-tags: [integrals]
+tags: [integrals, distribution]
 image: lines_through_cylinder.png
 use_math: true
 ---

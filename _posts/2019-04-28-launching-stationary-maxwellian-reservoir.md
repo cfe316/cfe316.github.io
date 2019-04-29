@@ -3,7 +3,7 @@ layout: post
 title: "The wrong (and right) way to select random velocities of particles moving through a surface"
 author: "Jacob Schwartz"
 categories: blog
-tags: [particles]
+tags: [particles, distribution]
 image: gaussian_and_rayleigh_influx_distributions.png
 use_math: true
 ---
