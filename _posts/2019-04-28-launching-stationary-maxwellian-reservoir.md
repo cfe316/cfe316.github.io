@@ -63,14 +63,21 @@ g(v_x, v_y, v_z) = \frac{1}{2 \pi } v_z \exp\left(-\frac{v_x^2 + v_y^2 + v_z^2}{
 $$
 This is the distribution we need to draw from when launching particles from the simulation boundary.
 
-These particles have $v_x$ and $v_y$ distributions identical to those from Equation (1), but the $v_z$ distribution is changed to what is termed a [Rayleigh distribution](https://en.wikipedia.org/wiki/Rayleigh_distribution).
+Figure 2 illustrates why the factor of $v_z$ is necessary.
+Particles moving with $\hat{z}\text{-velocity}$ $v_z$ can make it across the boundary in time $dt$ if they are at a distance $v_z\;dt$ or less from the boundary. The density of particles in a given velocity increment $dv_z$ is proportional to $f(v_z)$, so the number of particles in that increment that cross a boundary in a time $dt$ is equal to $f(v_z) dv_z \; v_z \; dt$.
+Note that while $f(v_1) > f(v_2)$ for $v_1 < v_2$, it is possible that $v_2 f(v_2) > v_1 f(v_1)$, as shown in the figure.
 
-It is constrasted with a half-Gaussian distribution in Figure 2, below.
+{% include figure.html url="v_dv.png" 
+caption="Figure 2: Particles moving at speed $v_1$ can make it across the boundary in time $dt$ if they are at a distance $v_1\;dt$ or less from the boundary; likewise for $v_2$. The amount of rightward-moving particles in a velocity increment $dv$ around $v$ that cross a boundary in $dt$ is $f(v) v \; dt \; dv$." %}
+
+The particles from the distribution in Equation 3 have $v_x$ and $v_y$ distributions identical to those from Equation (1), but the $v_z$ distribution is changed to what is termed a [Rayleigh distribution](https://en.wikipedia.org/wiki/Rayleigh_distribution).
+
+It is constrasted with a half-Gaussian distribution in Figure 3, below.
 There are two notable features: first, the value of the distribution tends to zero as $v_z \to 0$; particles moving very slowly don't cross your boundary of choice very often. Second, the probability-mass is skewed to the right compared with the half-Gaussian; fast-moving particles cross boundaries more often. 
 
 {% include figure.html url="rayleigh_vs_half-gaussian.png" 
-caption="Figure 2: A Rayleigh distribution, blue, compared with a half-Gaussian, orange. Both are normalized so that the integral over the positive reals is unity." %}
-The Rayleigh distribution has the property that $\left<v_z^2\right> = 2$, thus, $\left<v^2\right> = 4$, so (dropping the $v_{th} = 1$ normalization for a moment) the average energy  $\left<\frac{1}{2} m v^2\right>$ of particles moving through a surface is $2 T$, not the $3/2 T$ of particles in a volume of equilibrium gas.
+caption="Figure 3: A Rayleigh distribution, blue, compared with a half-Gaussian, orange. Both are normalized so that the integral over the positive reals is unity." %}
+The Rayleigh distribution has the property that $\left<v_z^2\right> = 2$, thus, $\left<v^2\right> = 4$, so (dropping the $v_{th} = 1$ normalization for a moment) the average energy  $\left<\frac{1}{2} m v^2\right>$ of particles moving through a _surface_ is $2 T$, not the $\frac{3}{2} T$ of particles in a _volume_ of equilibrium gas.
 In the original, flawed code, the injection of particles with the lower average energy associated with a half-Gaussian led to the anomalously low temperature I saw.
 
 Incidentally, the Rayleigh distribution is also is identical to the distribution of *radial* velocity $v_r = \sqrt{v_x^2 + v_y^2}$.
@@ -108,7 +115,7 @@ vz = SQRT(-2 * LOG(rand))
 I ran this algorithm and checked that the velocities had the correct properties. I also had some fun visualizing the level curves of the distribution $g$.
 
 {% include figure.html url="influx-distribution-contour-plot.png" 
-caption="Figure 3: Five hundred radial and z-directed velocities picked from the distribution $g$, Equation (3). The contours are boundaries inside which should lie 25%, 50%, 75%, and 95% of sampled velocities." %}
+caption="Figure 4: Five hundred radial and z-directed velocities picked from the distribution $g$, Equation (3). The contours are boundaries inside which should lie 25%, 50%, 75%, and 95% of sampled velocities." %}
 
 Even better, I was able to add the algorithm to the code and saw that it fixed my launched particles!
 
@@ -138,10 +145,10 @@ $$
 $$
 
 where $W$ is the [Lambert W function](https://en.wikipedia.org/wiki/Lambert_W_function), defined such $W(z)$ gives the solution for w in $z = w \exp(w) $.
-As a clarification, the meaning of these points is shown in Figure 4:
+As a clarification, the meaning of these points is shown in Figure 5:
 
 {% include figure.html url="influx-maxwellian-low-and-high-limits.png"
-caption="Figure 4: 'Low' and 'high' limits of the $(v_z, v_r)$ contour." %}
+caption="Figure 5: 'Low' and 'high' limits of the $(v_z, v_r)$ contour." %}
 
 We need to find the amount of $G$ inside this contour for a given $h$. Integrate $G$ in the $v_r$ and $v_z$ directions:
 
