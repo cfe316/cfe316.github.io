@@ -44,7 +44,10 @@ caption="Figure 1: The velocities in a stationary equilibrium gas of (dimensionl
 
 ### The fundamental conceptual problem
 
-If we were modeling a volumetric source of particles (perhaps if were starting another type of simulation with particles already inside a box), this would be the correct distribution from which to draw. However, we are modeling particles that have crossed an imaginary planar boundary from the outside (stationary Maxwellian) reservoir into our simulation space. The fact that these particles had to cross the planar boundary means that their velocity though that boundary must be positive. Additionally, particles with faster speeds normal to the boundary are more likely to cross that boundary.
+If we were modeling a volumetric source of particles (perhaps if were starting another type of simulation with particles already inside a box), this would be the correct distribution from which to draw.
+However, we are modeling particles that have crossed an imaginary planar boundary from the outside (stationary Maxwellian) reservoir into our simulation space.
+The fact that these particles had to cross the planar boundary means that their velocity through that boundary must be positive.
+Additionally, particles with faster speeds normal to the boundary are more likely to cross that boundary.
 
 As an example of the last statement, imagine cars in two lanes on a highway: one lane with cars moving at 1m/s, and the other with cars moving at 100m/s. Assume that the cars in both lanes are spaced 100 m apart. A person standing on the side of the road will see one fast car pass per second, and one slow car only once per 100 seconds. Yet, the density of cars per kilometer in each lane is the same.
 
@@ -61,8 +64,16 @@ $$
 This is the distribution we need to draw from when launching particles from the simulation boundary.
 
 These particles have $v_x$ and $v_y$ distributions identical to those from Equation (1), but the $v_z$ distribution is changed to what is termed a [Rayleigh distribution](https://en.wikipedia.org/wiki/Rayleigh_distribution).
-It has the property that $\left<v_z^2\right> = 2$, thus, $\left<v^2\right> = 4$.
-Incidentally, this is identical to the distribution of *radial* velocity $v_r = \sqrt{v_x^2 + v_y^2}$.
+
+It is constrasted with a half-Gaussian distribution in Figure 2, below.
+There are two notable features: first, the value of the distribution tends to zero as $v_z \to 0$; particles moving very slowly don't cross your boundary of choice very often. Second, the probability-mass is skewed to the right compared with the half-Gaussian; fast-moving particles cross boundaries more often. 
+
+{% include figure.html url="rayleigh_vs_half-gaussian.png" 
+caption="Figure 2: A Rayleigh distribution, blue, compared with a half-Gaussian, orange. Both are normalized so that the integral over the positive reals is unity." %}
+The Rayleigh distribution has the property that $\left<v_z^2\right> = 2$, thus, $\left<v^2\right> = 4$, so (dropping the $v_{th} = 1$ normalization for a moment) the average energy  $\left<\frac{1}{2} m v^2\right>$ of particles moving through a surface is $2 T$, not the $3/2 T$ of particles in a volume of equilibrium gas.
+In the original, flawed code, the injection of particles with the lower average energy associated with a half-Gaussian led to the anomalously low temperature I saw.
+
+Incidentally, the Rayleigh distribution is also is identical to the distribution of *radial* velocity $v_r = \sqrt{v_x^2 + v_y^2}$.
 
 ### Sampling from the Maxwellian-influx distribution $g$.
 
@@ -97,7 +108,7 @@ vz = SQRT(-2 * LOG(rand))
 I ran this algorithm and checked that the velocities had the correct properties. I also had some fun visualizing the level curves of the distribution $g$.
 
 {% include figure.html url="influx-distribution-contour-plot.png" 
-caption="Figure 2: Five hundred radial and z-directed velocities picked from the distribution $g$, Equation (3). The contours are boundaries inside which should lie 25%, 50%, 75%, and 95% of sampled velocities." %}
+caption="Figure 3: Five hundred radial and z-directed velocities picked from the distribution $g$, Equation (3). The contours are boundaries inside which should lie 25%, 50%, 75%, and 95% of sampled velocities." %}
 
 Even better, I was able to add the algorithm to the code and saw that it fixed my launched particles!
 
@@ -127,10 +138,10 @@ $$
 $$
 
 where $W$ is the [Lambert W function](https://en.wikipedia.org/wiki/Lambert_W_function), defined such $W(z)$ gives the solution for w in $z = w \exp(w) $.
-As a clarification, the meaning of these points is shown in Figure 3:
+As a clarification, the meaning of these points is shown in Figure 4:
 
 {% include figure.html url="influx-maxwellian-low-and-high-limits.png"
-caption="Figure 3: 'Low' and 'high' limits of the $(v_z, v_r)$ contour." %}
+caption="Figure 4: 'Low' and 'high' limits of the $(v_z, v_r)$ contour." %}
 
 We need to find the amount of $G$ inside this contour for a given $h$. Integrate $G$ in the $v_r$ and $v_z$ directions:
 
