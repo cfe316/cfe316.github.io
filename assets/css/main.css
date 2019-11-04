@@ -86,6 +86,10 @@ hr {
   width: 615px;
 }
 
+.footnotes {
+  border-top: 2px solid #ccc;
+}
+
 /*48em*/
 
 @media (max-width: 768px) {
