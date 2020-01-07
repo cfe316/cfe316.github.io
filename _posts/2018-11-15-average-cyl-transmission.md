@@ -57,7 +57,7 @@ We will set up the integral in a similar way:
 
 $$
 \begin{equation}
-f(\lambda) = \left<e^{-d/\lambda} \right> \frac{\int_{0}^{\pi} \int_{-\pi/2}^{\pi/2} l(\theta,\phi) e^{-d(\theta,\phi)/\lambda} \sin\theta \; d \phi \; d \theta }{\int_{0}^{\pi} \int_{-\pi/2}^{\pi/2} l(\theta,\phi) \sin\theta \; d \phi \; d \theta }
+f(\lambda) = \left<e^{-d/\lambda} \right> = \frac{\int_{0}^{\pi} \int_{-\pi/2}^{\pi/2} l(\theta,\phi) e^{-d(\theta,\phi)/\lambda} \sin\theta \; d \phi \; d \theta }{\int_{0}^{\pi} \int_{-\pi/2}^{\pi/2} l(\theta,\phi) \sin\theta \; d \phi \; d \theta }
 \tag{2}\label{eq:two}
 \end{equation}
 $$
