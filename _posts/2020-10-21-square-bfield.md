@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Magnetic field at the surface of a square conductor"
+title: "Magnetic field at the surface of a long conductor with a square cross section"
 author: "Jacob Schwartz"
 categories: journal
 tags: [magnets,algebra]
