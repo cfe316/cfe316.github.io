@@ -11,7 +11,7 @@ The most intense neutron flux in a tokamak is normally found at the midplane. Th
 
 If we want to optimize a tokamak reactor design, we need a way to estimate the neutron flux at the inboard and outboard midplane. We can use an expensive MCNP calculation to check a few point designs, but it would be useful to have an easy-to-compute relation that gives the relative scaling as a function of the radius of the inner wall, the plasma major radius, and the radius of the outboard wall.
 
-We make a number of simplifying assumptions for this calculation, in order to make the problem tractable.
+We make a number of simplifying assumptions for this calculation, in order to make the problem tractable. Caution: I am not an expert on neutronics so these assumptions could well be so bad as to make the answer worthless.
   * The neutron source has the shape of an infinitestimal ring.
   * Neutrons travel in straight lines and do not bounce out of the wall; we are concerned with the fluxes of neutrons 'initially' encountering the wall.
 
@@ -33,7 +33,7 @@ $$
 
 where the term in parenthesis is the flux from an infinetesmal length of the ring source, $S R \; d\theta$, spread over a sphere of area $ 4 \pi d^2$. The $\cos$ term is the angle from a given ray of neutrons to the wall's normal. The integration is limited to angles $\theta$ that are visible to the wall; too large and the source is 'below the horizon'.
 
-From elementary trigonometry, $\theta_\mathrm{max} = \arccos(\rho)$, $d^2 = R^2 \left((\cos\theta - \rho)^2 + \sin^2\theta\right)^{-1}$, and $\cos\psi = (\cos\theta - \rho) / \sqrt{(\cos\theta - \rho)^2 + \sin^2\theta}$.
+From elementary trigonometry, $\theta_\mathrm{max} = \arccos(\rho)$, $d^2 = R^2 \left((\cos\theta - \rho)^2 + \sin^2\theta\right)$, and $\cos\psi = (\cos\theta - \rho) / \sqrt{(\cos\theta - \rho)^2 + \sin^2\theta}$.
 The integral becomes
 
 $$
@@ -81,7 +81,7 @@ $$\theta_\mathrm{max} = \arctan\left(\rho ^2-\sqrt{\left(\rho ^2-1\right) \left(
    ^2}+\sqrt{1-\rho ^2}\right)\right),$$
 
 where $\arctan$ takes arguments in the order $(x, y)$. The maximum $\theta$ occurs when the source becomes hidden by the center stack.
-The formula for distance is $d = 1/(1 + P^2 - 2 P \cos\theta) $ and $\cos(\psi(\theta)) = (P - \cos\theta)/((P - \cos\theta)^2 + \sin^2\theta )$.
+The formula for distance is $d^2 = R^2 (1 + P^2 - 2 P \cos\theta) $ and $\cos(\psi(\theta)) = (P - \cos\theta)/((P - \cos\theta)^2 + \sin^2\theta )$.
 
 $$
 \Gamma_n =  \frac{1 - \rho}{2} \int_{-\theta_\mathrm{max}}^{\theta_\mathrm{max}} \frac{P - \cos\theta}{(1 + P^2 - 2 P \cos\theta)^{3/2}}\; d\theta
