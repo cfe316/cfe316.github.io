@@ -3,7 +3,7 @@ layout: post
 title: "Polar form for an ellipse offset from the origin"
 author: "Jacob Schwartz"
 categories: journal
-tags: [algebra]
+tags: [algebra, geometry]
 image: polar_ellipse.png
 use_math: true
 ---
