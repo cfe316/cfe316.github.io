@@ -21,15 +21,13 @@ $$
 where $a$ is the horizontal semi-major axis, $b$ is the vertical semi-major axis, and the center of the ellipse is $(x, y)$.
 
 In Mathematica:
+
 ```
-d[a_, b_, x_, 
-  y_, \[Theta]_] := (a^2 y Sin[\[Theta]] + b^2 x Cos[\[Theta]] + 
-   a b  Sqrt[
-    Cos[\[Theta]]^2 (b^2 - y^2) + 
-     2 x y Sin[\[Theta]] Cos[\[Theta]] + (a^2 - 
-        x^2) Sin[\[Theta]]^2])/(b^2 Cos[\[Theta]]^2 + 
-   a^2 Sin[\[Theta]]^2)
+rho[a_, b_, x_, y_, th_] := (a^2 y Sin[th] + b^2 x Cos[th] + 
+   a b  Sqrt[ Cos[th]^2 (b^2 - y^2) + 2 x y Sin[th] Cos[th] + (a^2 - 
+        x^2) Sin[th]^2])/(b^2 Cos[th]^2 + a^2 Sin[th]^2)
 ```
+
 ### Limitations
 
 This equation only works where the origin is inside the ellipse: otherwise there are some angles for which there is no radius to the ellipse, and two solutions for the radius elsewhere.
