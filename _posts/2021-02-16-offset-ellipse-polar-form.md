@@ -30,7 +30,7 @@ rho[a_, b_, x_, y_, th_] := (a^2 y Sin[th] + b^2 x Cos[th] +
 
 ### Limitations
 
-This equation only works where the origin is inside the ellipse: otherwise there are some angles for which there is no radius to the ellipse, and two solutions for the radius elsewhere.
+This equation only works for all $\theta$ where the origin is inside the ellipse: otherwise there are some angles for which there is no radius to the ellipse, and two solutions for the radius elsewhere.
 
 ## Hints for the derivation
 
