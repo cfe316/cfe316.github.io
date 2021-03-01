@@ -80,3 +80,12 @@ References
 Gralnick, S. L.; Tenney, F. H. Analytic Solutions for Constant‐tension Coil Shapes. J. Appl. Phys. 1976, 47, 7. [https://doi.org/10.1063/1.322993](https://doi.org/10.1063/1.322993).
 
 This paper is also freely available as a [PPPL report](https://www.osti.gov/biblio/4096514/).
+
+
+File, J.; Mills, R. G.; Sheffield, G. V. Large Superconducting Magnet Designs for Fusion Reactors. IEEE Transactions on Nuclear Science 1971, 18 (4), 277–282. [https://doi.org/10.1109/TNS.1971.4326354](https://doi.org/10.1109/TNS.1971.4326354)
+
+I think this paper is the first description of the Princeton D shape.
+
+File, J.; Sheffield., G. V. A Large Superconducting Magnet for Fusion Research; MATT-927; Princeton Plasma Physics Laboratory: Princeton, NJ, 1972. [https://www.osti.gov/biblio/5839625-large-superconducting-magnet-fusion-research](https://www.osti.gov/biblio/5839625-large-superconducting-magnet-fusion-research)
+
+This similarly-titled, but different, report describes what the shape of the magnets should be when there are only a finite number of coils.
