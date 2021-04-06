@@ -35,7 +35,7 @@ $$
 The length of a curve parallel to a closed curve is equal to the length of the given curve plus $2 \pi d$.
 If you have a rope that tightly encircles the earth, how much longer would it need to be in order to keep a uniform distance of 1 meter from the ground?
 
-Since the arc length of an ellipse is $\ell = 4 E(1-\kappa^2)$, a parallel curve at distance $d$ has the arc length $\ell_d = 2 \pi d + 4 E(1-\kappa^2)$.
+Since the arc length of the ellipse is $\ell = 4 a E(1-\kappa^2)$, a parallel curve at distance $d$ has the arc length $\ell_d = 2 \pi d + 4 a E(1-\kappa^2)$.
 
 ## Area enclosed by the parallel curve
 
