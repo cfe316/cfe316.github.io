@@ -68,7 +68,7 @@ Sauter presents approximate formulas for $L_p,$ $A_p,$ $S_\phi,$ and $V$. As far
 Rather than a double integral in Cartesian coordinates $\;dR \; dZ$ it's convenient to integrate directly from the parametric form $R(t), Z(t)$. The poloidal cross-section area is
 
 $$\begin{align}
-S_\phi &= \int_0^{2\pi} -Z(t) \frac{d R}{d t} = 2 a^2 \int_0^\pi - Z_A(t) \frac{d R_A(t)}{d t}\;dt \\ 
+S_\phi &= \int_0^{2\pi} -Z(t) \frac{d R}{d t} \; dt = 2 a^2 \int_0^\pi - Z_A(t) \frac{d R_A(t)}{d t}\;dt \\ 
  &= 2 a^2 \kappa \int_0^\pi (1 + \delta \cos t )\sin(t + \delta \sin t )\sin t \; dt.
  \end{align}
 $$
