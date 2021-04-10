@@ -62,7 +62,7 @@ I do not think there a convenient polar form, for distance to the LCFS parameter
 
 ## Exact results and derivation of approximations
 
-Sauter presents approximate formulas for $L_p,$ $A_p,$, $S_\phi,$, and $V$. As far as I can tell, these are based on numerical fits to collections of plasmas with various shapes, including $\xi \ne 0$ and plasmas which are _not_ up-down symmetric. Since I'm less interested in $\xi$, it would be nice to have a collection of formulas specifically for $\xi = 0$. And for self-consistency's sake it would be good to have close matches to use with exact moments from numerical integrations that I might need to do later.
+Sauter presents approximate formulas for $L_p,$ $A_p,$ $S_\phi,$ and $V$. As far as I can tell, these are based on numerical fits to collections of plasmas with various shapes, including $\xi \ne 0$ and plasmas which are _not_ up-down symmetric. Since I'm less interested in $\xi$, it would be nice to have a collection of formulas specifically for $\xi = 0$. And for self-consistency's sake it would be good to have close matches to use with exact moments from numerical integrations that I might need to do later.
 
 ### Poloidal cross-section area
 Rather than a double integral in Cartesian coordinates $\;dR \; dZ$ it's convenient to integrate directly from the parametric form $R(t), Z(t)$. The poloidal cross-section area is
