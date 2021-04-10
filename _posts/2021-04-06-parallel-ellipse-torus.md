@@ -51,6 +51,7 @@ If we sweep the parallel curve around the y axis to make a torus, the volume of 
 $$V_d = -\int_0^{\pi} 2 y_d(t) 2 \pi x_d(t) \frac{d x_d}{dt} dt$$
 
 $$V_d = 2 \pi R_0 A_d = 2 \pi R_0 \left(\pi (d^2 + a^2 \kappa) + 4 a d E(1-\kappa^2)\right)$$.
+Note that the simple relation $$V_d = 2 \pi R_0 A_d$$ isn't true for any shape swept around the centerline. It has to be left-right symmetrical around $R_0$.
 
 Since the volume of the original torus is $2 \pi R_0 \pi a^2 \kappa$ the volume of the 'parallel' region alone is
 $ 2 \pi R_0 \left(\pi d^2 + 4 a d E(1-\kappa^2)\right)$.
