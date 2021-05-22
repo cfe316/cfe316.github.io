@@ -7,6 +7,10 @@ tags: [algebra, geometry, sauter, plasma]
 image: sauter_shape_delta_multi.png
 use_math: true
 ---
+I've been developing a new "systems code" for studying the design and economics of fusion reactors.
+Fusion reactor systems codes used simplified representations of the various parts of the machine—the plasma, magnets, breeding blankets, electrical generatros, and so forth—in order to be able to compute and reason about aspects of the system as a whole.
+In this post, I describe a simple parameterization for the shape of the plasma boundary.
+
 In a [2016 paper](dx.doi.org/10.1016/j.fusengdes.2016.04.033), O. Sauter describes a parameterized shape for a plasma boundary, 
 
 $$
