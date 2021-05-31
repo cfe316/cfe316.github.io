@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Sauter shape studies, Part 1"
+title: "Sauter shape studies, Part 1: Overview, volume, and cross-sectional area"
 author: "Jacob Schwartz"
 categories: journal
 tags: [algebra, geometry, sauter, plasma]
