@@ -116,5 +116,5 @@ is accurate to within a factor of 1.0006.
 
 ### Poloidal length and surface area.
 
-These are a bit trickier so I will leave them to Part II!
+These are a bit trickier so I will leave them to [Part II](http://www.jaschwartz.net/journal/sauter-shape-studies-2.html)!
 
