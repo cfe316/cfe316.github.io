@@ -81,7 +81,7 @@ and the rate of their consumption is
 
 $$ s_d \left(n_K - s_{r,S} n_S - s_{r,L} n_{L1} - 2 s_{r,L} n_{L2} - 3 s_{r,L} n_{L3}\right).$$
 
-## Mathematica code 
+### Solution using Mathematica
 
 Solving this LFP with Mathematica is especially easy because it has a built-in function `LinearFractionalOptimization`.
 
@@ -102,7 +102,7 @@ longestDurationLFO[nKerbals_, massBudget_] :=
   masses = {mS, mL, mL, mL};
   α = -suppToTot masses;
   β = suppToTot massBudget;
-  γ = -{srs, srl, 2 srl, 3 srl};
+  γ = -sd {srs, srl, 2 srl, 3 srl};
   δ = sd nKerbals;
   ac1 = {1, 1, 2, 3} (*kerbals served per recycler*);
   bc1 = nKerbals;
@@ -128,4 +128,11 @@ longestDurationLFO[nKerbals_, massBudget_] :=
    "LargeRec" -> largeRec, "Days" -> days|>
   ]
 ```
+
+### Example chart of optimal mass for 11 Kerbals
+
+Figure 1 shows the smallest mass and number of recyclers of each type required to support $n_K = 11$ Kerbals for a certain number of days. The optimal solution takes the form of several line segments. For $n_K$ evenly divisible by three there are three segments, corresponding to no recyclers, one small recycler per Kebal, and one large recycler per three Kerbals. For $n_K > 3$ and not evenly divisible by three there are four segments, such as seen in Figure 1.
+
+{% include figure.html url="ksp_usi_eleven_kerbals_chart.png" 
+caption="Figure 1: Optimal mass in tons for life support for 11 kerbals over a certain mission duration, and the number of recyclers of each type which should be allocated."%} 
 
