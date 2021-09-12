@@ -37,17 +37,17 @@ Each Kerbal can only be assisted by one recycler, and it will choose the one tha
 There are additional mechanics in USI-LS (Habitation requirements, and fertilizer and agroponics to grow more Supplies) but this post will not consider them further.
 
 ## Problem formulation
-Rather than solve for the minimum mass to supply $n_K$ Kerbals for $d$ days, we solve for the maximum number of days $d$ on which they can survive for a given life support mass budget $m_\mathrm{tot}$. This turns out to be equivalent but is easier to formulate. Our decision variables are the numbers of small and large recyclers $n_S$ and $n_L$.
+Rather than solve for the minimum mass to supply $n_K$ Kerbals for $d$ days, we solve for the maximum number of days $d$ on which they can survive for a given life support mass budget $m_\mathrm{tot}$. This turns out to be equivalent but is easier to formulate. Our decision variables are the numbers of small and large recyclers, $n_S$ and $n_L$, respectively.
 
-The number of days they can last is just the mass of supplies divided by their rate of consumption, so the objective is
+The number of days they can survive is just the mass of supplies divided by their rate of consumption, so the objective is
 
 $$ \mathrm{maximize} \quad d = \frac{m_\mathrm{supp}}{r_\mathrm{supp}}.$$
 
 The mass of supplies is $(5/6)(m_\mathrm{tot} - n_S m_S - n_L m_L)$.
 The rate of consumption is a bit more difficult to write correctly, since the Large Recycler applies to up to three Kerbals. This is a nonlinear behavior. As a first approximation, we will consider a system where the Large Recycler can be divided into three parts, each of which applies to only one Kerbal. Call the number of these $n_{L_3^1}$ and their mass $m_{L_3^1} = m_{L} / 3$.
 
-The rate of consumption is then $s_d (n_K - s_{r,S} n_S - s_{r,L} n_{L_3})$, and the mass of supplies is
-$(5/6)(m_\mathrm{tot} - n_S m_S - n_{L_3} m_{L_3})$
+The rate of consumption is then $s_d (n_K - s_{r,S} n_S - s_{r,L} n_{L_3^1})$, and the mass of supplies is
+$(5/6)(m_\mathrm{tot} - n_S m_S - n_{L_3} m_{L_3^1})$
 The constraints are nonnegativity,
 
 $ n_S \ge 0, \quad n_{L_3^1} \ge 0$;
@@ -67,6 +67,8 @@ $$ \frac{\alpha^T x + \beta}{\gamma^T x + \delta} $$
 where $\alpha = \frac{5}{6}(-m_S, -m_{L_3^1})$, $\beta = \frac{5}{6}m_\mathrm{tot}$, $\gamma = -s_d \left(s_{r,S}, s_{r,L}\right)$, $\delta = s_d n_K$, and $x = (n_S, n_{L_3^1})$.
 The constraints are all linear functions of the input variables as well. This means that the problem can be solved by LFP.
 This is good, because LFP problems are easy to solve. They can be transformed into standard Linear Programming (LP) problems automatically.
+However, this is also an Integer Programming problem, since the number of small recyclers and large recyclers must be an integer.
+This means our problem is in ILFP, Integer Linear Fractional Programming.
 
 ## Removing the approximation
 
@@ -75,48 +77,54 @@ We do this by splitting the Large Recycler into three varieties, each of which h
 
 The decision variable vector $x$ is $\left(n_S, n_{L1}, n_{L2}, n_{L3}\right)$.
 
-The mass of Supplies is $$ m_\mathrm{supp} = \frac{5}{6}(m_\mathrm{tot} - n_S m_S - n_{L1} m_L - n_{L2} m_L - n_{L3} m_L)$$
+The mass of Supplies is
+
+$$ m_\mathrm{supp} = \frac{5}{6}(m_\mathrm{tot} - n_S m_S - n_{L1} m_L - n_{L2} m_L - n_{L3} m_L)$$
 
 and the rate of their consumption is 
 
-$$ s_d \left(n_K - s_{r,S} n_S - s_{r,L} n_{L1} - 2 s_{r,L} n_{L2} - 3 s_{r,L} n_{L3}\right).$$
+$$ r_\mathrm{supp} = s_d \left(n_K - s_{r,S} n_S - s_{r,L} n_{L1} - 2 s_{r,L} n_{L2} - 3 s_{r,L} n_{L3}\right).$$
+
+The constraint on the number of recyclers becomes
+
+$$ n_S + n_{L1} + 2 n_{L2} + 3 n_{L3} \le n_K $$.
 
 ### Solution using Mathematica
 
-Solving this LFP with Mathematica is especially easy because it has a built-in function `LinearFractionalOptimization`.
+Solving this ILFP with Mathematica is especially easy because it has a built-in function `LinearFractionalOptimization`.
 
 Here is a *Mathematica* function to solve the problem. `nKerbals` is an integer and the `massBudget` is in tons.
 
 ```
+sd = 0.0108 (*tons per day per kerbal*);
+suppToTot = 5/6 (*Ratio of supplies to total mass*);
+mS = 0.1 (*tons*);
+mL = 3.75 (*tons*);
+srs = 0.6 (*supply reduction for the Small Recycler*);
+srl = 0.79 (*supply reduction for the Large Recycler*);
+
 longestDurationLFO[nKerbals_, massBudget_] := 
- Module[{sd, suppToTot, srs, srl, mS, mL, 
-   masses, α, β, γ, δ, ac1, bc1, sol, x, 
+ Module[{masses, α, β, γ, δ, ac1, bc1, sol, x, 
    xsol, positivityConstraint, massBudgetConstraint, 
    kerbalsServedConstraint, constraints, mSupp, days, largeRec}, 
-  sd = 0.0108 (*tons per day per kerbal*);
-  suppToTot = 5/6 (*Ratio of supplies to total mass*);
-  mS = 0.1 (*tons*);
-  mL = 3.75 (*tons*);
-  srs = 0.6 (*supply reduction for the Small Recycler*);
-  srl = 0.79 (*supply reduction for the Large Recycler*);
+
   masses = {mS, mL, mL, mL};
   α = -suppToTot masses;
   β = suppToTot massBudget;
   γ = -sd {srs, srl, 2 srl, 3 srl};
   δ = sd nKerbals;
+
   ac1 = {1, 1, 2, 3} (*kerbals served per recycler*);
   bc1 = nKerbals;
   
-  positivityConstraint = { {1, 0, 0, 0}.x >= 0, {0, 1, 0, 0}.x >= 0,
-    {0, 0, 1, 0}.x >= 0, {0, 0, 0, 1}.x >= 0};
+  positivityConstraint = VectorGreaterEqual[{IdentityMatrix[4].x, 0}];
   massBudgetConstraint = masses.x <= massBudget;
   kerbalsServedConstraint = ac1.x <= bc1;
-  constraints = 
-   Join[positivityConstraint, {massBudgetConstraint, 
-     kerbalsServedConstraint}];
+  constraints = {positivityConstraint, massBudgetConstraint, 
+     kerbalsServedConstraint};
   
   sol = LinearFractionalOptimization[-(α.x + β)/(γ.x + δ),
-    constraints, x, {Integers, Integers, Integers, Integers}];
+    constraints, {x ∈ Vectors[4, Integers]}];
 
   (*postprocessing*)
   
@@ -126,7 +134,7 @@ longestDurationLFO[nKerbals_, massBudget_] :=
   largeRec = Total[xsol[[2 ;;]]];
   <|"Supplies/kg" -> 1000 mSupp, "SmallRec" -> xsol[[1]], 
    "LargeRec" -> largeRec, "Days" -> days|>
-  ]
+]
 ```
 
 ### Example chart of optimal mass for 11 Kerbals
@@ -136,3 +144,13 @@ Figure 1 shows the smallest mass and number of recyclers of each type required t
 {% include figure.html url="ksp_usi_eleven_kerbals_chart.png" 
 caption="Figure 1: Optimal mass in tons for life support for 11 kerbals over a certain mission duration, and the number of recyclers of each type which should be allocated."%} 
 
+#### (Lack of) a quick solution using open-source software
+
+Unfortunately python's `scipy.optimize` only has a linear programming engine `linprog` built in; it doesn't solve even LFP or (mixed) integer linear programming problems (ILP or MILP).
+There is relatively simple way to transform a LFP problem to an LP problem (the 'Charles-Cooper transformation') but it's more complex to transform ILFP into ILP, and a library like `pyomo` plus a solver would be required.
+
+Alternately, for this problem it's pretty easy to enumerate all the reasonable combinations of recyclers, find the linear relationships between days of supplies and total mass that each leads to, and find the lowest mass from these linear relationships. 
+However, that technique might be more difficult if the complexity of the program were to increase, for example, if more types of recyclers were included.
+
+# Future work: inclusion of Agroponics modules
+So far I've only explored three elements of USI Life Support: the Supplies containers and the Small and Large Recyclers. However, there is another class of element: the Agroponics module, which turns Fertilizer and Mulch into Supplies. These should substantially reduce the mass required, leading to better solutions. The optimal life support system including these should be explored in future work.
