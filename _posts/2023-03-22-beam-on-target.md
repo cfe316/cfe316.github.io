@@ -191,6 +191,17 @@ $$
 
 At large $E_b / T$, the first term on the right hand side has almost all of the value.
 
+Making the above substitution leads to the slightly cleaner formula
+
+
+$$
+\left<\sigma v\right> = 
+\frac{1}{\sqrt{2 \pi}} \frac{1}{v_\mathrm{th}\,v_F}
+\int_0^{\infty}dv\,v^2 \sigma(v)
+\left(e^{-(v - v_F)^2 / (2 v_\mathrm{th}^2)} - e^{-(v + v_F)^2 / (2 v_\mathrm{th}^2)}\right)
+.
+$$
+
 ### Limits
 
 At $T \ll E_F$, the rate coefficient tends toward $v_F\,\sigma(E_F \mu / m_F)$: no integral necessary.
