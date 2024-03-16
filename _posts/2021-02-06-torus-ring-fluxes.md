@@ -54,7 +54,12 @@ $$
 \end{split}
 $$
 
+where $\phi_\mathrm{in} = \arccos(\rho)/2$ and $m_\mathrm{in} = -4\rho/(1-\rho)^2$.
+
+{::comment}
+Previously this was:
 where $\phi_\mathrm{in} = \arcsin(\sqrt{(1-\rho)/2})$ and $m_\mathrm{in} = -4\rho/(1-\rho)^2$.
+{:/comment}
 
 {::comment}
 It can be expressed in perhaps a nicer way by converting from $\rho$ to aspect ratio $A$; $\rho \to 1 - 1/A$:
