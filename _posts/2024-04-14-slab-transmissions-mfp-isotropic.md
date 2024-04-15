@@ -9,7 +9,7 @@ use_math: true
 ---
 
 # Motivation
-This is meant as a rough analogy to the problem of neutron deposition in the first wall of a fusion reactor.
+This problem is explored in rough analogy to the problem of neutron deposition in the first wall of a fusion reactor. Of course, this lacks any number of complexities, but I'm interested in this set up as a very simple model.
 
 # Problem statement
 There is a slab of material of thickness $a$.
@@ -118,3 +118,8 @@ caption="Figure 2: Deposition in the slab $d(a,\lambda)$ and the short and long-
 
 The second figure shows deposition in the slab. This has a similar long-range asymptotic, but the derivative of this function becomes infinite as $a\to\infty$.
 A good short-range approximation is $\frac{1}{\lambda}\left(2-2(1-\gamma)\frac{a}{\lambda}-\frac{a^2}{\lambda ^2}+2 \frac{a}{\lambda}\log \left(\frac{a}{\lambda }\right)\right)$ where $\gamma$ is the Euler constant.
+
+## Relation to other posts
+This problem is similar to the one in my [first post]({% post_url 2016-01-15-radioactive-particle-escape-3d %}).
+The geometry is the same (if inverted) but now I've averaged over the distribution of particles that encounter a surface.
+The solution is also in terms of `ExpIntegralE`.
