@@ -47,11 +47,11 @@ t = 2\int_0^{\pi/2} d\theta \sin \theta \cos\theta\, e^{-a/{\lambda \cos\theta}}
 \end{equation}
 $$
 
-The integral can be simplified via u-subsitution, $u = \frac{\lambda}{a} \cos\theta$ and $du = -\frac{\lambda}{a}\sin\theta$. It becomes
+The integral can be simplified via u-subsitution, $u = \cos\theta$ and $du = -\sin\theta\,d\theta$. It becomes
 
 $$
 \begin{equation}
-t = 2 \left(\frac{a}{\lambda}\right)^2 \int_0^{\lambda/a} u \,e^{-1/u} \; du.
+t = 2 \int_0^{1} u \,e^{-a/(\lambda u)} \; du.
 \end{equation}
 $$
 
@@ -59,33 +59,30 @@ A second substituion of $w = 1/u$ makes this into
 
 $$
 \begin{equation}
-t = 2 \left(\frac{a}{\lambda}\right)^2 \int_{a/\lambda}^{\infty} \frac{1}{w^3} e^{-w} \;dw.
+t = 2 \int_{1}^{\infty} \frac{1}{w^3} e^{-w (a/\lambda)} \;dw.
 \end{equation}
 $$
 
-From here one can simply use integration by parts and the definition of the exponential integral, $$\mathrm{Ei}(x) = -\int_{-x}^\infty \frac{e^{-t}}{t} \; dt$$.
+This matches the definition of the generalized [exponential integral](https://en.wikipedia.org/wiki/Exponential_integral), the [$\mathrm{E}_n$-function](https://mathworld.wolfram.com/En-Function.html), $$\mathrm{E}_n(x) = \int_{1}^\infty \frac{e^{-t x}}{t^n} \; dt$$. In Mathematica it is implemented as `ExpIntegralE[n,x]`.
 
 # Solution
 $$
 \begin{equation}
-t\left(\frac{a}{\lambda}\right) = e^{-\frac{a}{\lambda }}-\frac{a}{\lambda}e^{-\frac{a}{\lambda }}
- -\left(\frac{a}{\lambda}\right)^2\text{Ei}\left(-\frac{a}{\lambda }\right)
+t\left(\frac{a}{\lambda}\right) = 2 \,\mathrm{E}_3\left(\frac{a}{\lambda}\right)
  \tag{1}\label{eq:one}
 \end{equation}
 $$
-where $t$ is the transmission factor and $\mathrm{Ei}$ is the [exponential](
-https://en.wikipedia.org/wiki/Exponential_integral) [integral](https://mathworld.wolfram.com/ExponentialIntegral.html).
 This expression is normalized so that a thin slab has $t = 1$.
 
 The deposition profile
 
 $$
 \begin{equation}
-d(a, \lambda) = \frac{2 a \text{Ei}\left(-\frac{a}{\lambda }\right)}{\lambda ^2}+\frac{2 e^{-\frac{a}{\lambda }}}{\lambda }
+d(a, \lambda) = 2 \frac{1}{\lambda} \mathrm{E}_2\left(\frac{a}{\lambda}\right)
 \end{equation}
 $$
 
-is the derivative of the transmission profile.
+is the derivative of the transmission profile: $$ (d/dx) \mathrm{E}_{n} = \mathrm{E}_{n-1}$$.
 This has the same normalization, and the integral of the deposition in a very thick slab is unity.
 
 ## Alternate construction of the deposition profile
@@ -99,7 +96,7 @@ d(a, \lambda) = 2 \int_0^{\pi/2}d\theta\, \sin\theta \frac{1}{\lambda} e^{-a/\la
 \end{equation}
 $$
 
-This can be evaluated in the same manner, but it's simpler; it becomes proportional $\int e^{-w}/w^2 \;dw$.
+This can be evaluated in the same manner, but it's simpler; it becomes proportional to $\int e^{-w}/w^2 \;dw$.
 
 ## Characteristics of the solution
 
