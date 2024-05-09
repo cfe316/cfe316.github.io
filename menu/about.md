@@ -3,7 +3,9 @@ layout: page
 title: Welcome to My Site!
 ---
 
-I'm a postdoctoral researcher in Princeton's Mechanical and Aerospace Engineering department. I'm currently developing a zero-D systems code for fusion reactors and studying the value of fusion for future electric grids and more broadly, energy systems.
+I'm a staff research physicist at the Princeton Plasma Physics Laboratory. 
+
+Before this I was a postdoc at Princeton University, working with the Plasma Control Group to develop an open-source "systems code" for tokamaks, and with ZERO Lab to study fusion's value as part of future electricity markets.
 
 I was previously a [graduate student](https://plasma.princeton.edu/people/jacob-schwartz) in Princeton's Program in Plasma Physics. My thesis work was on developing a piece of technology with application for nuclear fusion reactors.
 
