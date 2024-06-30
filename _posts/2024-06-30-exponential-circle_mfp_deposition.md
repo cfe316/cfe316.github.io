@@ -546,6 +546,8 @@ Putting $l_n(\lambda)$ back into the formula for $\underline{i}$ I was able to c
 
 ## The shape of $\underline{i}$
 
+The cover image shows $f/\lambda$ as a function of $\theta$ for $\lambda=1/2$ (blue) and $\lambda=2$ (green).
+Figure 3 shows the $\underline{i}$ that result from integrating over $\theta$.
 
 {% include figure.html url="exponential_circle_mfp_plot.png" 
 caption="Figure 3: 
