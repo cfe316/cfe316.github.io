@@ -11,9 +11,9 @@ use_math: true
 The previous two posts have been about collision probability integrals in slab geometry.
 I've tried extending this to the geometry of an infinite cylinder, but got stuck. 
 The quantity of interest to me is the radial profile of interactions coming from particles in a uniform,
-isotropic gas outside of the cylinder.
-When the particles enter the cylinder, they are absorbed with some mean free path $\lambda$.
-This is the same geometry as in [this previous post]({% post_url 2018-11-15-average-cyl-transmission %}), but with a different question---asking where the particles stop instead of how many make it through.
+isotropic gas outside of the cylinder, where the particles
+are absorbed with some mean free path $\lambda$ when they enter the cylinder. 
+This is the same geometry as in [this earlier post]({% post_url 2018-11-15-average-cyl-transmission %}), but with a different question---asking where the particles stop instead of how many make it through.
 $$
 \newcommand{\cancelcolor}[1]{\color{midnightblue}{#1}}
 \newcommand{\gone}[1]{\color{midnightblue}{#1}}
@@ -58,8 +58,8 @@ $$
 
 I will explain this expression.
 The numerator of the quantity in the exponent has two terms.
-The term $\sqrt{1-\rho^2\sin^2\theta}$ is the x-location of the right-hand edge of the circle, at the y-value $\rho \sin\theta$.
-The term $\rho \cos\theta$ is the x-location of the point on the right at radius $\rho$. The difference between them is the thickness of material that particles from the direction $\phi$ need to travel through to get to the point on the ring.
+The $\sqrt{1-\rho^2\sin^2\theta}$ is the x-location of the right-hand edge of the circle, at the y-value $\rho \sin\theta$.
+The $\rho \cos\theta$ is the x-location of the point on the right at radius $\rho$. The difference between them is the thickness of material that particles from the direction $\phi$ need to travel through to get to the point on the ring.
 The leading $1/\lambda$ is the intensity of deposition from particles with mean free path $\lambda$.
 
 The $\color{midnightblue}{\rho}$ in the integral is the standard Jacobian for polar coordinates.
@@ -69,185 +69,110 @@ Cancelling the $\color{midnightblue}{\rho}$, the reduced deposition intensity at
 
 $$
 \begin{equation}
-\underline{i} = \frac{1}{\lambda}\frac{1}{2\pi}\int_0^{2\pi}\;d\theta\; \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right).
+\underline{i} = \frac{1}{2 \pi \lambda}\int_0^{2\pi}\;d\theta\; \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right).
  \tag{2}\label{eq:two}
 \end{equation}
 $$
 
-## As a Taylor series
-
-I express $\underline{i}$ as a Taylor series around $\rho=0$.
-Pleasingly, only the even terms are present, and all coefficients are positive.
+For brevity I will define
 
 $$
 \begin{equation}
-\boxed{
-\;\underline{i} = \frac{e^{-1/\lambda}}{\lambda}
-\sum_{n \text{ even},\;n\ge0}^{\infty}
-\frac{1}{n!} \frac{\rho^n}{\lambda^n}
-\sum_{k = 0}^n \frac{\lambda^k}{(n/2)!}
-\sum_{c = \max(k - n/2,\,0)}^{\min(k/2, n)} t(n,k,c)
-\;}
-
+f \equiv \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right)
 \end{equation}
 $$
 
+so Equation \eqref{eq:two} can be expressed as
 
-<!--
+$$ \underline{i} = \frac{1}{2\pi\lambda} \int_0^{2\pi} f\; d\theta.$$
 
-$$
-\begin{equation}
-T(n,k) \equiv \frac{\lambda^k}{(n/2)!} \sum_{c = \max(k - n/2,\,0)}^{\min(k/2, n)} t(n,k,c)
-\end{equation}
-$$
+Unfortunately, we cannot evaluate the integral in terms of elementary functions, or
+as far as I can tell, even in terms of complicated non-elementary functions like the Meijer-G function.
 
-and where
--->
+Instead, I will find a Taylor series for $\underline{i}$ around $\rho=0$. 
+I will do this by expanding $f$ in a Taylor series and integrating each term.
 
-where
+## Outline
 
-$$
-\begin{equation}
-t(n,k,c) \equiv \frac{(k-c)_c}{2^c \,\pi} \binom{k-c-1}{c} \binom{n}{2 c-2 k+n}\Gamma\left(k - c+\frac{1}{2}\right)  \Gamma
-   \left(c-k+\frac{n+1}{2}\right) (2k-2c-1)\text{!!}
-\end{equation}
-$$
+I will express $f$ as a Taylor series:
 
+$$ f = \sum_{n=0}^\infty j_n(\lambda, \theta) \frac{\rho^n}{n!} $$
 
-where $(x)_y$ is the [Pochhammer symbol](https://en.wikipedia.org/w/index.php?title=Pochhammer_symbol), $\binom{x}{y}$ is a binomial, $\Gamma$ is the Gamma function, and `!!` is the double factorial $(n (n-2) \ldots)$. Here Pochhammer is preferred to a ratio of Gamma functions because it is `1` rather than undefined when $x=y=0$.
+where $j_n(\lambda, \theta)$ are functions of $\theta$ and $\lambda$.
+By the standard Taylor series construction,
 
-**Woof.** Those are quite some coefficients!
-Mechanically, it's easy to get the coefficients of the taylor series one by one, via repeated differentiation, but it was more difficult to figure out how to express them in a form such that the coefficient of the $n'$th term can be computed.
+$$ j_n \equiv \left(\left.\frac{d}{d\rho^n}f\right)\right|_{\rho=0} .$$
 
-In the rest of the post I'll describe how I came up with this formula for the coefficients $\mathscr{T}_n(\lambda)$.
+Then 
 
-Here by $\mathscr{T}_n(\lambda)$ I mean the polynomial in $\lambda$ such that
+$$\underline{i} = \frac{1}{2\pi\lambda} \int d\theta \sum_n j_n(\lambda,\theta) \frac{\rho^n}{n!}.$$
 
-$$
-\begin{equation}
-\underline{i} = \frac{e^{-1/\lambda}}{\lambda}
-\sum_{n \text{ even},\;n\ge0}^{\infty}
-\frac{1}{n!}\frac{\rho^n}{\lambda^n} \mathscr{T}_n(\lambda).
-\end{equation}
-$$
+I reverse the order of the sum and integral (and move left the $\rho^n/n!$) to get a Taylor series for $\underline{i}$,
 
-This polynomial $\mathscr{T}_n(\lambda)$ handles the interesting complex part of the result;
-what's left is a constant in the front and more or less the expected parts of a Taylor series.
-Dialing in even further,
+$$\underline{i} = \frac{1}{2\pi\lambda} \sum_n\frac{\rho^n}{n!} l_n(\lambda)$$
 
-$$
-\mathscr{T}_n(\lambda) \equiv \sum_{k = 0}^n \lambda^k \mathscr{T}_{n,k}
-$$
+where I'm defining
 
-where
+$$ l_n(\lambda) \equiv \int_0^{2\pi} j_{n}(\lambda,\theta)\;d\theta .$$
 
-$$
-\begin{equation}
-\mathscr{T}_{n,k} = \frac{1}{(n/2)!}
-\sum_{c = \max(k - n/2,\,0)}^{\min(k/2, n)} t(n,k,c).
-\end{equation}
-$$
+I will show that each $j_n(\lambda, \theta)$ is a sum of terms of the form
 
-## Prelude: Slight Mechanical Derivative
+$$ w\, e^{-1/\lambda} \frac{\sin^{2s}\theta\cos^q\theta}{\lambda^g}$$
 
-Equation \eqref{eq:two} can be expressed as
+where $w$, $s$, $q$, and $g$ are non-negative integers, and further, $q$ is even.
 
-$$ \underline{i} = \frac{1}{2\pi\lambda} \int_0^{2\pi} f\; d\theta$$
+Then, $l_n$ is a polynomial in $1/\lambda$,
 
-where $f \equiv \exp(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda)$.
+$$ l_n(\lambda) = e^{-1/\lambda} \pi \sum_{k=0}^{n-1} \frac{u_{n,k}}{\lambda^{n-k}}$$
 
-Let's expand the integrand in a Taylor series around $\rho=0$:
-
-$$ \underline{i} = \frac{1}{2\pi\lambda} \int_0^{2 \pi} \sum_{n=0}^{\infty} \frac{\rho^n}{n!} \left(\left. \frac{d}{d\rho^n} f\right) \right|_{\rho=0}  \; d\theta.$$
-
-Since the integral is over $\theta$ only we can move the integral sign inside the sum:
-
-$$ \underline{i} =  \frac{1}{2\pi\lambda}\sum_{n=0}^{\infty} \frac{\rho^n}{n!} \int_0^{2 \pi} \left(\left. \frac{d}{d\rho^n} f\right) \right|_{\rho=0}  \; d\theta.$$
-
-The task is then to find a general form for the coefficient of $\rho^n$,
-
-$$
-\begin{equation}
-a_n = \frac{1}{2\pi\lambda\,n!}\int_0^{2 \pi} \left(\left. \frac{d}{d\rho^n} f\right) \right|_{\rho=0}  \; d\theta.
- \tag{3}\label{eq:generalTaylorForm}
-\end{equation}
-$$
-
-The first few are
-
-{% include margin-note.html id="1" content="
-In this notation,
-$a_n = e^{-1/\lambda}\lambda^{-(n+1)}\mathscr{T}_n(\lambda)/n!$.
-" %}
-
-$$
-\begin{aligned}
-a_0 &= e^{-1/\lambda} / \lambda \\
-a_2 &= (1 + \lambda)\, e^{-1/\lambda} / 4\,\lambda^3\\
-a_4 &= (1 + 2\lambda + 3 \lambda^2 + 3 \lambda^3) \, e^{-1/\lambda} / 64\,\lambda^5\\
-a_6 &= (1+3 \lambda +9 \lambda ^2+24 \lambda ^3+45 \lambda ^4+45 \lambda ^5) e^{-1/\lambda} / 2304\,\lambda^7 \\
-\end{aligned}
-$$
-
-The integers in the denominator are given by $2^n((n/2)!)^2$.
-The process that forms the polynomials in the numerator is more complex, and not amenable by a simple lookup in [OEIS](https://oeis.org/A002454) (A002454, with $n \to n/2$). 
-This process will be discussed in the next section.
+where $u_{n,k}$ are ratios of integers.
+The coefficients $w$ and then $u_{n,k}$ will be found by carefully analyzing the 
+derivative-taking process.
+It will turn out that $u_{n,k}$ is best expressed as a sum over a third index, which I'll call $c$.
 
 
-## The polynomial game
+## The derivative-taking game
 
-Let's look at the integral of Equation \eqref{eq:generalTaylorForm}.
-Taking derivatives of $f$ yields sums of terms of the form
+Taking repeated derivatives of $f$ with respect to $\rho$ yields sums of terms of the form
 
 $$
 \begin{equation}
 w\left(\frac{\rho^r \sin^{2s}\theta \cos^q\theta}{\lambda^g(1 - \rho^2 \sin^2\theta)^m}\right)f
- \tag{4}\label{eq:rsqform}
+\tag{3}\label{eq:rsqform}
 \end{equation}
 $$
 
 where $w$, $r$, $s$, $q$, and $g$ are non-negative integers, and $m$ can be an integer or half-integer $(0, 1/2, 1, 3/2, \ldots)$.
 
 For example the first derivative is
-{% include margin-note.html id="2" content="
-The leading $f^{-1}$ is for brevity of the displayed math.
+{% include margin-note.html id="1" content="
+The leading $f^{-1}$ is for brevity.
 It's not part of the integral or Taylor series process.
 " %}
 
-$$f^{-1} f' = \frac{\cos\theta}{\lambda }+\frac{\rho  \sin ^2\theta}{\lambda  (1-\rho ^2 \sin ^2\theta)^{1/2}}$$
+$$f^{-1} f' =
+\frac{\rho  \sin ^2\theta}{\lambda  (1-\rho ^2 \sin ^2\theta)^{1/2}} +
+\frac{\cos\theta}{\lambda }
+$$
 
 and the second derivative is
 
 $$
 \begin{aligned}
-f^{-1} f'' &= \frac{\sin ^2\theta}{\lambda  \left(1-\rho ^2 \sin ^2\theta\right)^{3/2}} + \frac{2 \rho \cos\theta \sin ^2\theta}{\lambda ^2 \left(1-\rho ^2 \sin ^2\theta\right)^{3/2}} - \frac{2 \rho ^3 \cos \theta \sin ^4\theta}{\lambda ^2 \left(1-\rho ^2 \sin ^2\theta\right)^{3/2}} \\
-&+ \frac{\cos ^2\theta}{\lambda ^2 \left(1-\rho ^2 \sin ^2\theta\right)} - \frac{\rho ^2 \cos ^2\theta \sin ^2\theta}{\lambda ^2 \left(1-\rho ^2 \sin ^2\theta\right)} + \frac{\rho ^2 \sin ^4\theta}{\lambda ^2 \left(1-\rho ^2 \sin ^2\theta\right)}.
+f^{-1}f'' &=
+\frac{\rho ^2 \sin ^4\theta}{\lambda ^2 \left(1-\rho ^2 \sin ^2\theta\right)}
++\frac{2 \rho  \cos \theta \sin ^2\theta}{\lambda ^2 \left(1-\rho ^2 \sin ^2\theta\right)^{1/2}} \\
+&+ \frac{\rho ^2 \sin ^4\theta}{\lambda  \left(1-\rho ^2 \sin ^2(\theta)\right)^{3/2}}
+  +\frac{\sin ^2\theta}{\lambda  \left(1-\rho ^2 \sin ^2\theta\right)^{1/2}}
++\frac{\cos ^2\theta}{\lambda ^2} \\
 \end{aligned}
 $$
-
-This intermediate step can generate many terms, but the expression simplifies considerably when setting $\rho \to 0$:
-
-$$
-\begin{aligned}
-\left.f'\right|_{\rho=0} &= \frac{\cos\theta}{\lambda} e^{-1/\lambda} \\
-\left.f''\right|_{\rho=0} &= \left(\frac{\cos^2\theta}{\lambda^2} + \frac{\sin^2\theta}{\lambda}\right)e^{-1/\lambda}.
-\end{aligned}
-$$
-
-Integrating from 0 to $2\pi$, these evaluate to
-
-$$
-\begin{aligned}
-b_1 \equiv \int \left.f'\right|_{\rho=0} &= 0 \\
-b_2 \equiv \int \left.f''\right|_{\rho=0} &= e^{-1/\lambda}\frac{\pi}{\lambda^2}\left(1 + \lambda\right) = a_2(2\pi\lambda\,2!) .
-\end{aligned}
-$$
-
 
 Examining the derivative process more closely, let's take the derivative with respect to $\rho$ of a general one of the Expression $\eqref{eq:rsqform}$-type terms.
-The existing $\sin^{2s}\cos^q/\lambda^g$ are independent of $\rho$, so I will ignore them.
+The existing $w \sin^{2s}\cos^q/\lambda^g$ are independent of $\rho$, so I will ignore them.
 
 $$
+\begin{equation}
 \begin{aligned}
 f^{-1}\frac{d}{d\rho} \frac{\rho^r}{\left(1 - \rho^2 \sin^2 \right)^m} f &=
 \frac{\rho^{r+1}\,\sin^2}{\lambda (1 - \rho^2 \sin^2)^{m+1/2}} 
@@ -255,9 +180,11 @@ f^{-1}\frac{d}{d\rho} \frac{\rho^r}{\left(1 - \rho^2 \sin^2 \right)^m} f &=
 &+ 2m\frac{\rho^{r+1}\sin^2}{(1 - \rho^2 \sin^2)^{m+1}}
 + r\frac{\rho^{r-1}}{(1 - \rho^2 \sin^2)^{m}}.
 \end{aligned}
+\tag{4}\label{eq:foursteps}
+\end{equation}
 $$
 
-Thinking of a term with some combination of $\{r, m, s, q, g\}$ as a point in a 5-d space, the derivative operation on a point yields up to four new points with associated weights $1$, $1$, $2m$, and $r$:
+Thinking of a term with some combination of $\{r, m, s, q, g\}$ as a point in a 5-d space, the derivative operation on a point with initial weight $w=1$ yields up to four new points with associated weights $1$, $1$, $2m$, and $r$:
 
 ```
 The four derivative steps:
@@ -265,48 +192,131 @@ The four derivative steps:
 +   {r  , m    , s  , q+1, g+1}   # B
 + 2m{r+1, m+1  , s+1, q  , g }    # C
 +  r{r-1, m    , s  , q  , g }    # D
+
+# These are in the same order as the terms in Eq (4).
 ```
 
-{% include margin-note.html id="3" content="
+{% include margin-note.html id="2" content="
 The base $f$ has $r=m=s=q=g=0$.
 " %}
 
 I say _up to_ four new points because if $m=0$ (as in the base $f$) or if $r=0$ (also in the base $f$, and along paths where $r$ increased and then decreased to zero) then those terms will not be generated. I've labeled the four new points, or steps, as $A, B, C, D$.
 
-For convenience I define 
+Here's a digram that shows this in action:
 
-$$
-b_n \equiv 2\pi\lambda \,n!\,a_n = \int_0^{2\pi}\left(\left. \frac{d}{d\rho^n} f\right) \right|_{\rho=0}  \; d\theta.
-$$
 
-We will find $b_n$ by taking $n$ steps along all the possible derivative paths, or, the valid combinations of $A$, $B$, $C$, $D$ of length $n$; then setting $\rho$ to zero, and finally integrating over $\theta$ to end up with a polynomial in terms of $1/\lambda$.
-The coefficient of each power of $\lambda$ is formed from the sum of the weights of all the valid paths that generate $\lambda$'s of that power.
+{% include figure.html url="exponential_circle_derivatives_tree.svg" 
+caption="Figure 2: Each term is generated by one of the four derivative steps.
+Any combination of steps like the set $\{A,B\}$ will contribute to the same term: $AB$ and $BA$ end up in the same place, though they might contribute different weights. 
+Not all terms have descendents for all steps: taking steps $C$ or $D$ from the root $1$ or $\cos/\lambda$ yields $0$.
+(I've dropped the final factor $f$ for all terms here.)
+ "%} 
 
-### A very general start
+Using a computer algebra system like Mathematica, it's not difficult to take derivatives, then set $\rho$ to 0, then integrate over $\theta$ to find the polynomial $l_n(\lambda)$.[^mechanical]
+But, it would be still be interesting to come up with a closed-form expression for $l_n(\lambda)$.
 
-One initial way to think about constructing the terms of the n'th derivative of $f$ is something like
+[^mechanical]: Mathematica snippet to generate $l_n(\lambda)$
+    ```
+    f = Exp[-(Sqrt[1 - ρ^2 Sin[θ]^2] - ρ Cos[ρ])/λ];
+    der[n_] := (D[f, {ρ, n}] // Expand)
+    j[n_] := (der[n]) /. ρ -> 0
+    l[n_] := Integrate[j[n], {θ, 0, 2 π}]
+    ```
+
+In order to do this, let's make some observations about the patterns of derivatives, or the patterns of steps, as in the diagram.
+
+### Only r=0 terms survive in $j_n$
+The $n'th$ derivative is the sum of all permutations of length $n$ of $\{A,B,C,D\}$.
 
 $$
 \begin{equation}
-\frac{d }{d\rho^n }f = \sum_{r,m,s,q,g} \left(\frac{\rho^r \sin^{2s}\theta \cos^q\theta}{\lambda^g(1 - \rho^2 \sin^2\theta)^m}\right)f
+n = a + b + c + d
+\tag{5}\label{eq:nabcd}
 \end{equation}
 $$
 
-### Restrictions on useful paths
+After taking the derivatives, the next step in forming $j_n$ is to set $\rho \to 0$.
+Only terms with the exponent $r=0$ (in $\rho^r$) will survive.
+The root term $1$ has $r=0$; steps $A$ and $C$ both increment $r$ and step $D$ decremenets it.
+Therefore, any surviving term will have
 
-#### Useful terms have $r=0$. 
-The fact that we set $\rho$ to zero before integrating means that the only terms left to integrate will ones with the power $r=0$. 
-Steps $A$ and $C$ both increase $r$, and step $D$ decreases it; $B$ leaves it unchanged.
-So, a term will remain only if the sum of the number of $A$s and $C$s equals the number of $D$s along a path.
+$$
+\begin{equation}
+a + c = d
+\tag{6}\label{eq:acd}
+\end{equation}
+$$
 
-$$\boxed{a + c -d = 0}$$
+where $a$ is the number of steps $A$, and so on.
 
-We use this restriction in the subsection immediately below.
+### Only even-$n$ $l_n(\lambda)$ are nonzero.
 
-### Weights of paths to get to a point
+Step $B$ contributes a factor $\cos\theta$ to the numerator.
+When this is integrated from $0$ to $2\pi$, terms with odd powers of cosine will be cancelled out; only terms with even $q$ will survive.
+As shown above, surviving terms have $a + c = d$, so $a + c + d$ is even.
+If $n$ is odd, $(a + c +d) + b$ must be odd as well, and $q=b$ so $q$ will be odd.
+Conversely, if $n$ is even $q$ will be even. 
+
+Therefore $l_n(\lambda)$ will be zero for all odd $n$.
+This means the Taylor series of $\underline{i}$ only has even powers of $\rho$!
+
+Also, all the terms contributing to even $l_n$ will have $\sin^{2s}\cos^{q}$ with even $q$.
+
+### Restrictions on valid $c$ for given $n, k$
+
+The polynomial $l_n(\lambda)$ is a sum of terms with different powers of $1/\lambda^{n-k}$.
+For a given $n$ and $k$ there are restrictions on $c$, the number of steps $C$ which can be taken to contribute to a term with $1/\lambda^{n-k}$.
+
+For example, by inspection of the table of steps above, only $A$ and $B$ increase $g$, that is, contribute a power of $1/\lambda$.
+Thus,
+
+$$
+\begin{equation}
+n-k = a+b.
+\tag{7}\label{eq:nkab}
+\end{equation}
+$$
+
+Using Equations \eqref{eq:nabcd}, \eqref{eq:acd}, and \eqref{eq:nkab}, together with the inequalities
+
+{% include margin-note.html id="3" content="
+The restriction on $b$ is less harsh than on $a, c, d$.
+Some of these 8 inequalities are redundant.
+" %}
+
+$$
+\begin{aligned}
+0 &\le a \le n/2 \\
+0 &\le b \le n  \\
+0 &\le c \le n/2  \\
+0 &\le d \le n/2
+\end{aligned}
+$$
+
+we find that for a given $(n,k)$,
+
+$$ \max(0, k-n/2) \le c \le k/2.$$
+
+From the equations listed above we can express $a$, $b$, and $d$ in terms of $n$, $k$, and $c$:
+
+{% include margin-note.html id="4" content="
+We could choose to put things in terms of $n$, $k$ and $b$
+but that comes out messier.
+" %}
+
+$$
+\begin{aligned}
+a &= k - 2c \\
+b &= n - 2k + 2c \\
+d &= k - c.
+\end{aligned}
+\tag{8}
+$$
+
+### Weights of paths to get to a term
 
 #### Factor from the order of (A|C)'s vs D's
-As discussed above, the number of $D$s must equal the number of $A$s and $C$s.
+From Equation \eqref{eq:acd}, $a + c = d$.
 The *order* of the $A$s, $C$s, and $D$s contributes an extra weight to path because of the coefficient $r$ whenever step $D$ is taken.
 For example, $AAADDD$ has a weight of $3∗2∗1=6$ but $ADADAD$ has a weight of $1∗1∗1=1$.
 {% include margin-note.html id="3" content="
@@ -319,51 +329,227 @@ For paths of length n=4
 ```
 AADD : weight of 2
 ADAD : weight of 1
-ADDA : invalid
-DAAD : invalid
-DADA : invalid
-DDAA : invalid
+ADDA : weight of 0
+DAAD : weight of 0
+DADA : weight of 0
+DDAA : weight of 0
 ```
 
-I found experimentally that the sum of the weights of all these paths is 
 
-$$ \gone{(2(a+c)-1)!! }$$
+I found experimentally[^acd] that the sum of the weights of all these paths matches
+[OEIS A001147](https://oeis.org/A001147), which is
+
+$$ (2(a+c)-1)!! = \gone{(2k-2c-1)!!}$$
 
 where `!!` is the double factorial.
+
+[^acd]: Mathematica snippet for the (A|C,D) process
+    ```
+    o = {1, 0};
+    ac = {#[[1]], #[[2]] + 1} &;
+    d = {Times @@ #, #[[2]] - 1} &;
+    p[i_] := Permutations[Flatten[{ac, d}~Table~i], {2 i}]
+    sim[i_] := Total[#[[1]] & /@ Map[(Composition @@ #)@o &, p[i]]]
+    sim /@ Range[0,6]
+```
 
 ### Factor from order of A's and C's
 In the above process, the order of $A$s and $C$s does not matter.
 But, there is also a weight for each path from the coefficients $2m$, which depends *only* on the order of the $A$s and $C$s.
 Each $A$ increases $m$ by $1/2$ and each $C$ multiplies the weight by $2m$ and increments $m$ by $1$.
 
-I simulated this process and found that the pattern of the sum of the weights over all permutations of $A$ and $C$ here was basically the same as the [Bessel numbers](https://oeis.org/A100861), but with the indices shifted. This yields a factor of 
+I simulated[^aAndC] this process and found that the pattern of the sum of the weights over all permutations of $A$ and $C$ here was basically the same as the [Bessel numbers](https://oeis.org/A100861), but with the indices shifted. This yields a factor of 
 
-$$\gtwo{\frac{(a + 2c - 1)!}{2^c (a-1)!c!}}.$$
+$$\frac{(a + 2c - 1)!}{2^c (a-1)!\,c!} =
+\frac{\Gamma(k)}{2^c\, c!\, \Gamma(k-2c)}=
+\gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}}
+$$
+
+where $(k-2c)_{2c}$ is a [Pochhammer symbol](https://en.wikipedia.org/w/index.php?title=Pochhammer_symbol). The latter form is preferred over the ratio of two Gamma functions to avoid an intederminate expression when $k=c=0$.
+
+[^aAndC]: Snippet for the A,C process
+    ```
+    o = {1, 0};
+    A = {#[[1]], #[[2]] + 1/2} &;
+    Cc = {2 Times @@ #, #[[2]] + 1} &;
+    perms[a_, c_] := Permutations[Join[A~Table~a, Cc~Table~c], {a + c}];
+    sim[a_, c_] := Total[#[[1]] & /@ Map[(Composition @@ #)@o &, perms[a, c]]];
+    ```
 
 ### Factor from insertion of B's
 The steps $B$ can be inserted anywhere in the above sequences without changing the outcome of the $r$-weights or $m$-weights.
-This contributes a factor
+Thus the number of paths is multiplied by
 
-$$\gthree{\binom{2(a+c) + b-1}{b-1}}.$$
+$$\binom{2(a+c) + b}{b} =
+\gthree{\binom{n}{n+2c-2k}} 
+$$
 
+where $\binom{x}{y}$ is a binomial.
 
-### Restriction
-I noticed experimentally that the $n=\text{odd}$ derivatives are always zero, because they have only $q=\text{odd}$ powers of cosine. 
-But the $n$-even derivatives _also_ have only even powers of cosine.
-This is because if $n = a + b + c + d$ is even, and $(a+c) = d$ then $a + c + d$ is even, so $b$ (which contributes a power of cosine) is even.
+### Harmonic factors
 
-Therefore before integrating over $\theta$, $b_n$ is a sum of terms $\cos^n, \cos^{n-2}\sin^{2}, \cos^{n-4}\sin^4, \ldots \sin^{n}$.
+Steps $A$ and $C$ contribute factors of $\sin^2\theta$ while step $B$ contributes $\cos\theta$.
 
-### Thing
-$A$ and $C$ both bring a factor of $\sin^2$, while $A$ and $B$ bring a factor of $1/\lambda$. Also $a + c = d$.
-For any given $\lambda^{k-n}$ *and* combination of $\cos$ and $\sin$ there is a limited range of $c$ which end up contributing.
-This leads to the restrictions on the sum to form the term with power $\lambda^{k-n}$, where $c$ ranges from $\max(k - n/2, 0)$ to $\min(k/2, n)$. 
+Thus the harmonic part will be 
 
-### Thing
-Finally, integrate. The integral of $\sin^{2s}\theta\cos^q\theta$ contributes a factor
+$$\sin^{2(a+c)}\theta \cos^b\theta =
+\sin^{2k-2c}\theta \cos^{n-2k+2c}\theta
+.$$
 
-$$\gfour{\frac{2 \Gamma \left(\frac{q+1}{2}\right) \Gamma
+### Setting $\rho$ to zero
+
+When setting $\rho$ to 0 each term like that in \eqref{eq:rsqform} becomes
+
+$$
+w \frac{\sin^{2s}\theta \cos^q \theta}{\lambda^g}e^{-1/\lambda} 
+ = w e^{-1/\lambda} \frac{\sin^{2k-2c}\theta \cos^{n-2k+2c}\theta}{\lambda^{n-k}}
+$$
+
+## Construct j
+
+Therefore
+
+$$ 
+\begin{aligned}
+j_n(\lambda,\theta) =
+e^{-1/\lambda}
+\sum_{k=0}^n 
+\frac{1}{\lambda^{n-k}}
+\sum_{c=\max(0,k-n/2)}^{k/2} &
+\gone{(2k-2c-1)!!}
+\gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}} \\
+&
+\gthree{\binom{n}{n+2c-2k}} 
+\sin^{2k-2c}\theta \cos^{n-2k+2c}\theta \\
+\end{aligned}
+$$
+
+## Integrate to get $l_n(\lambda)$
+
+For even $q$,
+
+$$ \int_0^{2\pi}
+\sin^{2s}\theta \cos^q\theta
+= \frac{2\, \Gamma \left(\frac{q+1}{2}\right) \Gamma
    \left(s+\frac{1}{2}\right)}{\Gamma
-   \left(\frac{q}{2}+s+1\right)}}$$
+   \left(\frac{q}{2}+s+1\right)}
+$$
 
-(and remember that the useful $q$ here are always even).
+Here $s = a + c = k-c$ and $q=b=n-2k+2c$. Therefore
+
+$$
+\begin{aligned}
+\frac{2\, \Gamma \left(\frac{q+1}{2}\right) \Gamma
+   \left(s+\frac{1}{2}\right)}{\Gamma
+   \left(\frac{q}{2}+s+1\right)}
+& \to
+\frac{2 \Gamma \left(\frac{1}{2}-c+k\right)
+\Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}
+{\Gamma \left(1+\frac{n}{2}\right)}
+ \\
+& =
+\gfour{
+\frac{2 \Gamma \left(\frac{1}{2}-c+k\right)
+\Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}
+{(n/2)!}
+}
+\end{aligned}
+$$
+
+and
+
+$$
+
+\boxed{
+\begin{aligned}
+
+
+l_n(\lambda) &=
+\frac{e^{-1/\lambda}} {\gfour{(n/2)!}}
+\sum_{k=0}^{n-1}
+\frac{1}{\lambda^{n-k}}
+\sum_{c=\max(0,\,k-n/2)}^{k/2}
+\gone{(2k-2c-1)!!} \\
+&
+\gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}}
+\gthree{\binom{n}{n+2c-2k}} 
+
+\gfour{2 \Gamma \left(\frac{1}{2}-c+k\right)
+\Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
+
+\end{aligned}
+}
+$$
+
+I've moved the $\gfour{(n/2)!}$ out to the front because it does not depend on $k$ or $c$.
+
+The first few $l_n$ are
+
+$$
+\begin{aligned}
+l_0 &= 2 e^{-1/\lambda } \pi  \\
+l_2 &= \frac{e^{-1/\lambda } \pi  (1+\lambda )}{\lambda ^2} \\
+l_4 &= \frac{3 e^{-1/\lambda } \pi  \left(1+2 \lambda +3 \lambda ^2+3 \lambda ^3\right)}{4 \lambda ^4} \\
+l_6 &= \frac{5 e^{-1/\lambda } \pi  \left(1+3 \lambda +9 \lambda ^2+24 \lambda ^3+45 \lambda ^4+45 \lambda ^5\right)}{8 \lambda ^6} \\
+l_8 &= \frac{35 e^{-1/\lambda } \pi  \left(1+4 \lambda +18 \lambda ^2+78 \lambda ^3+285 \lambda ^4+810 \lambda ^5+1575 \lambda ^6+1575 \lambda ^7\right)}{64 \lambda ^8}
+\end{aligned}
+$$
+
+For completeness,
+
+$$
+
+\begin{aligned}
+
+
+u_{n,k} &=
+\frac{1} {\gfour{(n/2)!}}
+\sum_{c=\max(0,\,k-n/2)}^{k/2}
+\gone{(2k-2c-1)!!} \\
+&
+\gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}}
+\gthree{\binom{n}{n+2c-2k}} 
+
+\gfour{2 \Gamma \left(\frac{1}{2}-c+k\right)
+\Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
+
+\end{aligned}
+$$
+
+## Finally $\underline{i}$
+
+$$
+
+\boxed{
+\begin{aligned}
+
+\underline{i} &=
+\frac{e^{-1/\lambda}}{\pi}
+\sum_{\text{even}\;n \ge 0}
+\frac{\rho^n}{n! \gfour{(n/2)!}}
+\sum_{k=0}^{n-1}
+\frac{1}{\lambda^{n-k+1}}
+\sum_{c=\max(0,\,k-n/2)}^{k/2}
+\gone{(2k-2c-1)!!} \\
+&
+\gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}}
+\gthree{\binom{n}{n+2c-2k}} 
+
+\gfour{\Gamma \left(\frac{1}{2}-c+k\right)
+\Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
+
+\end{aligned}
+}
+$$
+
+Putting $l_n(\lambda)$ back into the formula for $\underline{i}$ I was able to combine the $\lambda$ with the others in the denominator and cancel a $2$.
+
+## The shape of $\underline{i}$
+
+
+{% include figure.html url="exponential_circle_mfp_plot.png" 
+caption="Figure 3: 
+Plot of $\underline{i}$ for $\lambda=(1/2)$ and $2$. For $\lambda=(1/2)$ I also show
+the partial sums from Taylor series of order 2, 4, 8, and 16.
+The Taylor series converges much more quickly for higher $\lambda$.
+ "%} 
