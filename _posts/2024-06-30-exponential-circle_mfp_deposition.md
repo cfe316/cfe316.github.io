@@ -117,9 +117,9 @@ $$ l_n(\lambda) \equiv \int_0^{2\pi} j_{n}(\lambda,\theta)\;d\theta .$$
 
 I will show that each $j_n(\lambda, \theta)$ is a sum of terms of the form
 
-$$ w\, e^{-1/\lambda} \frac{\sin^{2s}\theta\cos^q\theta}{\lambda^g}$$
+$$ w\, e^{-1/\lambda} \frac{\sin^{2s}\theta\cos^b\theta}{\lambda^g}$$
 
-where $w$, $s$, $q$, and $g$ are non-negative integers, and further, $q$ is even.
+where $w$, $s$, $b$, and $g$ are non-negative integers, and further, $b$ is even.
 
 Then, $l_n$ is a polynomial in $1/\lambda$,
 
@@ -137,12 +137,12 @@ Taking repeated derivatives of $f$ with respect to $\rho$ yields sums of terms o
 
 $$
 \begin{equation}
-w\left(\frac{\rho^r \sin^{2s}\theta \cos^q\theta}{\lambda^g(1 - \rho^2 \sin^2\theta)^m}\right)f
+w\left(\frac{\rho^r \sin^{2s}\theta \cos^b\theta}{\lambda^g(1 - \rho^2 \sin^2\theta)^m}\right)f
 \tag{3}\label{eq:rsqform}
 \end{equation}
 $$
 
-where $w$, $r$, $s$, $q$, and $g$ are non-negative integers, and $m$ can be an integer or half-integer $(0, 1/2, 1, 3/2, \ldots)$.
+where $w$, $r$, $s$, $b$, and $g$ are non-negative integers, and $m$ can be an integer or half-integer $(0, 1/2, 1, 3/2, \ldots)$.
 
 For example the first derivative is
 {% include margin-note.html id="1" content="
@@ -169,7 +169,7 @@ f^{-1}f'' &=
 $$
 
 Examining the derivative process more closely, let's take the derivative with respect to $\rho$ of a general one of the Expression $\eqref{eq:rsqform}$-type terms.
-The existing $w \sin^{2s}\cos^q/\lambda^g$ are independent of $\rho$, so I will ignore them.
+The existing $w \sin^{2s}\cos^b/\lambda^g$ are independent of $\rho$, so I will ignore them.
 
 $$
 \begin{equation}
@@ -184,20 +184,20 @@ f^{-1}\frac{d}{d\rho} \frac{\rho^r}{\left(1 - \rho^2 \sin^2 \right)^m} f &=
 \end{equation}
 $$
 
-Thinking of a term with some combination of $\{r, m, s, q, g\}$ as a point in a 5-d space, the derivative operation on a point with initial weight $w=1$ yields up to four new points with associated weights $1$, $1$, $2m$, and $r$:
+Thinking of a term with some combination of $\{r, m, s, b, g\}$ as a point in a 5-d space, the derivative operation on a point with initial weight $w=1$ yields up to four new points with associated weights $1$, $1$, $2m$, and $r$:
 
 ```
 The four derivative steps:
-    {r+1, m+1/2, s+1, q  , g+1}   # A
-+   {r  , m    , s  , q+1, g+1}   # B
-+ 2m{r+1, m+1  , s+1, q  , g }    # C
-+  r{r-1, m    , s  , q  , g }    # D
+    {r+1, m+1/2, s+1, b  , g+1}   # A
++   {r  , m    , s  , b+1, g+1}   # B
++ 2m{r+1, m+1  , s+1, b  , g }    # C
++  r{r-1, m    , s  , b  , g }    # D
 
 # These are in the same order as the terms in Eq (4).
 ```
 
 {% include margin-note.html id="2" content="
-The base $f$ has $r=m=s=q=g=0$.
+The base $f$ has $r=m=s=b=g=0$.
 " %}
 
 I say _up to_ four new points because if $m=0$ (as in the base $f$) or if $r=0$ (also in the base $f$, and along paths where $r$ increased and then decreased to zero) then those terms will not be generated. I've labeled the four new points, or steps, as $A, B, C, D$.
@@ -252,15 +252,15 @@ where $a$ is the number of steps $A$, and so on.
 ### Only even-$n$ $l_n(\lambda)$ are nonzero.
 
 Step $B$ contributes a factor $\cos\theta$ to the numerator.
-When this is integrated from $0$ to $2\pi$, terms with odd powers of cosine will be cancelled out; only terms with even $q$ will survive.
+When this is integrated from $0$ to $2\pi$, terms with odd powers of cosine will be cancelled out; only terms with even $b$ will survive.
 As shown above, surviving terms have $a + c = d$, so $a + c + d$ is even.
-If $n$ is odd, $(a + c +d) + b$ must be odd as well, and $q=b$ so $q$ will be odd.
-Conversely, if $n$ is even $q$ will be even. 
+If $n$ is odd, $(a + c +d) + b$ must be odd as well, so $b$ will be odd.
+Conversely, if $n$ is even $b$ will be even. 
 
 Therefore $l_n(\lambda)$ will be zero for all odd $n$.
 This means the Taylor series of $\underline{i}$ only has even powers of $\rho$!
 
-Also, all the terms contributing to even $l_n$ will have $\sin^{2s}\cos^{q}$ with even $q$.
+Also, all the terms contributing to even $l_n$ will have $\sin^{2s}\cos^{b}$ with even $b$.
 
 ### Restrictions on valid $c$ for given $n, k$
 
@@ -401,7 +401,7 @@ $$\sin^{2(a+c)}\theta \cos^b\theta =
 When setting $\rho$ to 0 each term like that in \eqref{eq:rsqform} becomes
 
 $$
-w \frac{\sin^{2s}\theta \cos^q \theta}{\lambda^g}e^{-1/\lambda} 
+w \frac{\sin^{2s}\theta \cos^b \theta}{\lambda^g}e^{-1/\lambda} 
  = w e^{-1/\lambda} \frac{\sin^{2k-2c}\theta \cos^{n-2k+2c}\theta}{\lambda^{n-k}}
 $$
 
@@ -426,22 +426,22 @@ $$
 
 ## Integrate to get $l_n(\lambda)$
 
-For even $q$,
+For even $b$,
 
 $$ \int_0^{2\pi}
-\sin^{2s}\theta \cos^q\theta
-= \frac{2\, \Gamma \left(\frac{q+1}{2}\right) \Gamma
+\sin^{2s}\theta \cos^b\theta
+= \frac{2\, \Gamma \left(\frac{b+1}{2}\right) \Gamma
    \left(s+\frac{1}{2}\right)}{\Gamma
-   \left(\frac{q}{2}+s+1\right)}
+   \left(\frac{b}{2}+s+1\right)}
 $$
 
-Here $s = a + c = k-c$ and $q=b=n-2k+2c$. Therefore
+Here $s = a + c = k-c$ and $b=n-2k+2c$. Therefore
 
 $$
 \begin{aligned}
-\frac{2\, \Gamma \left(\frac{q+1}{2}\right) \Gamma
+\frac{2\, \Gamma \left(\frac{b+1}{2}\right) \Gamma
    \left(s+\frac{1}{2}\right)}{\Gamma
-   \left(\frac{q}{2}+s+1\right)}
+   \left(\frac{b}{2}+s+1\right)}
 & \to
 \frac{2 \Gamma \left(\frac{1}{2}-c+k\right)
 \Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}
