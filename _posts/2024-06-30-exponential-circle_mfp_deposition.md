@@ -503,7 +503,7 @@ $$
 
 
 u_{n,k} &=
-\frac{1} {\gfour{(n/2)!}}
+\frac{1} {\pi \gfour{(n/2)!}}
 \sum_{c=\max(0,\,k-n/2)}^{k/2}
 \gone{(2k-2c-1)!!} \\
 &
