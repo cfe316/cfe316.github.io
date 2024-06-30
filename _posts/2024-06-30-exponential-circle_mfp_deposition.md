@@ -465,7 +465,7 @@ $$
 
 
 l_n(\lambda) &=
-\frac{e^{-1/\lambda}} {\gfour{(n/2)!}}
+\frac{\gfour{2} e^{-1/\lambda}} {\gfour{(n/2)!}}
 \sum_{k=0}^{n-1}
 \frac{1}{\lambda^{n-k}}
 \sum_{c=\max(0,\,k-n/2)}^{k/2}
@@ -474,14 +474,14 @@ l_n(\lambda) &=
 \gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}}
 \gthree{\binom{n}{n+2c-2k}} 
 
-\gfour{2 \Gamma \left(\frac{1}{2}-c+k\right)
+\gfour{\Gamma \left(\frac{1}{2}-c+k\right)
 \Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
 
 \end{aligned}
 }
 $$
 
-I've moved the $\gfour{(n/2)!}$ out to the front because it does not depend on $k$ or $c$.
+I've moved the $\gfour{2/(n/2)!}$ out to the front because it does not depend on $k$ or $c$.
 
 The first few $l_n$ are
 
@@ -503,14 +503,14 @@ $$
 
 
 u_{n,k} &=
-\frac{1} {\pi \gfour{(n/2)!}}
+\frac{\gfour{2}} {\pi \gfour{(n/2)!}}
 \sum_{c=\max(0,\,k-n/2)}^{k/2}
 \gone{(2k-2c-1)!!} \\
 &
 \gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}}
 \gthree{\binom{n}{n+2c-2k}} 
 
-\gfour{2 \Gamma \left(\frac{1}{2}-c+k\right)
+\gfour{\Gamma \left(\frac{1}{2}-c+k\right)
 \Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
 
 \end{aligned}
