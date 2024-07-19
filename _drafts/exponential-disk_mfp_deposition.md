@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Deposition profiles in a circle: a tricky Taylor series"
+title: "Deposition profiles in a disk: a tricky Taylor series"
 author: "Jacob Schwartz"
 categories: journal
-image: exponential_circle_mfp_traces.svg
+image: exponential_disk_mfp_stippled.png
 tags: [integration,mean free path]
 use_math: true
 ---
@@ -555,3 +555,7 @@ Plot of $\underline{i}$ for $\lambda=(1/2)$ and $2$. For $\lambda=(1/2)$ I also 
 the partial sums from Taylor series of order 2, 4, 8, and 16.
 The Taylor series converges much more quickly for higher $\lambda$.
  "%} 
+
+## Postscript
+
+Thanks to C. Swanson and J. Parisi for your proofreading and encouragement.
