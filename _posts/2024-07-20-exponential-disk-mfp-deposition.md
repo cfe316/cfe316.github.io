@@ -37,7 +37,8 @@ The deposition intensity is
 $$ i(\rho, \lambda) = \frac{\int_{\phi=0}^{2\pi}d\phi \int_{\theta=0}^{2\pi}\cancelcolor{\rho}\, d\theta\,y(\phi,\theta, \rho, \lambda)\,d\rho}{2\pi\cancelcolor{\rho} \,d\rho} $$
 
 where $y(\phi, \theta, \rho, \lambda)$ is the deposition intensity from particles moving at angle $\phi$, at radius $\rho$ and central angle $\theta$.
-The $\cancelcolor{\rho}$ in the numerator is the standard Jacobian of polar coordinates. (This will cancel with the $\cancelcolor{\rho}$ in the denominator.)
+The $\cancelcolor{\rho}$ in the numerator is the standard Jacobian of polar coordinates. 
+This will cancel with the $\cancelcolor{\rho}$ in the denominator; the $d\rho$s also cancel.
 
 By symmetry, the radial intensity from all angles $\phi$ is the same;
 thus we can consider an equivalent scenario where all particles come from the same direction, but with $2\pi$ times the intensity.
