@@ -1,19 +1,19 @@
 ---
 layout: post
-title: "Deposition profiles in a disk: a tricky Taylor series"
+title: "Radial profiles of deposition in a disk: a tricky Taylor series"
 author: "Jacob Schwartz"
 categories: journal
-image: exponential_disk_mfp_stippled.png
+image: exponential_disk_mfp_geometry.svg
 tags: [integration,mean free path]
 use_math: true
 ---
 
-The previous two posts have been about collision probability integrals in slab geometry.
-I've tried extending this to the geometry of an infinite cylinder, but got stuck. 
-The quantity of interest to me is the radial profile of interactions coming from particles in a uniform,
-isotropic gas outside of the cylinder, where the particles
-are absorbed with some mean free path $\lambda$ when they enter the cylinder. 
-This is the same geometry as in [this earlier post]({% post_url 2018-11-15-average-cyl-transmission %}), but with a different question---asking where the particles stop instead of how many make it through.
+The previous post calculated the fraction of particles encountering a 2D disk which pass though the diisk before being absorbed (deposited) with some mean free path $\lambda$.
+This post calculates the radial profile of the intensity of deposition in the disk: the number of particles are deposited per unit area at radius $0 \lt \rho \lt 1.$
+
+A disk of radius $1$ is surrounded by a uniform 2D-isotropic gas of particles. 
+This problem is indifferent to their distribution of speeds; which could be Maxwellian (as a typical gas), or identical (as like photons); interactions depend only the distance travelled through the disk.
+
 $$
 \newcommand{\cancelcolor}[1]{\color{midnightblue}{#1}}
 \newcommand{\gone}[1]{\color{midnightblue}{#1}}
@@ -22,55 +22,48 @@ $$
 \newcommand{\gfour}[1]{\color{purple}{#1}}
 $$
 
-## Bad news: this post only solves a 2D version of the problem, not 3D
+## Problem background and setup
+### Background gas
+Assume the background density of particles is $1$ per unit length squared and all particles move at a speed of $1$ unit length per unit time.
+The one-way flux across a unit-length line segment is $\left(\int_{-\pi/2}^{\pi/2} 1 * 1 * \cos\phi\;d\phi\right)/ \left(\int_{-\pi}^{\pi}\;d\phi\right) = 1/\pi$ per unit time, where $\phi$ is the direction of particle motion.
+Since the disk has circumference of $2\pi$ the rate of particles entering the disk is $2$ per unit time.
 
-### Let me explain
+### Setup for integration
+I want to find the intensity of deposition at a given radius $\rho$.
+This is the total deposition per unit time in the annulus of radius $\rho$ and width $d\rho$ summed over all central angles $\theta$, divided by the annulus area of $2\pi\rho\,d\rho$.
 
+The deposition intensity is
+
+$$ i(\rho, \lambda) = \frac{\int_{\phi=0}^{2\pi}d\phi \int_{\theta=0}^{2\pi}\cancelcolor{\rho}\, d\theta\,y(\phi,\theta, \rho, \lambda)\,d\rho}{2\pi\cancelcolor{\rho} \,d\rho} $$
+
+where $y(\phi, \theta, \rho, \lambda)$ is the deposition intensity from particles moving at angle $\phi$, at radius $\rho$ and central angle $\theta$.
+The $\cancelcolor{\rho}$ in the numerator is the standard Jacobian of polar coordinates. (This will cancel with the $\cancelcolor{\rho}$ in the denominator.)
+
+By symmetry, the radial intensity from all angles $\phi$ is the same;
+thus we can consider an equivalent scenario where all particles come from the same direction, but with $2\pi$ times the intensity.
+The cover illustration shows all particles entering from the right, with $\phi=\pi$.
+
+<!---
 The bad news is, I have not found a nice form for the deposition profile $d(\rho, \lambda)$.
 (I've since found the 1977 paper by Michael Milgram [On the properties of collision probability integrals in annular geometry](https://pubs.aip.org/jmp/article/18/12/2456/225431/On-the-properties-of-collision-probability), which I'm working through.)
+-->
 
-Finding the deposition intensity at a given radius requires summing over particles coming from all possible directions. There are many ways to add them up: one could sum over all the possible $v_x$, $v_y$, and $v_z$ that hit the cylinder, for example. 
-For this problem, I decompose this into sums over particles that that hit the cylinder coming from
-* All possible 'impact parameters' $b$.
-* All possible azimuthal angles $\phi$.
-* All the polar angles $\beta$ from $0$ to $\pi$.
+{% include figure.html url="exponential_disk_mfp_detailed_geometry.svg" 
+caption="Figure 1: Geometry detail for the decay distance as a function of $\theta$. At this stage, the integral has been rearranged so that all particles come from the right side of the disk.
+ "%} 
 
-This blog post only covers the first two, which is hard enough.
-Actually, it's mostly about the first integral, over the relevant impact factors. The second is trivial, as by symmetry the deposition from any $\phi$ is the same.
-So, we have a flat, circular geometry, shown in Figure 1.
+For particles coming from a fixed $\phi$, the deposition at the point given by $(\rho, \theta)$ is proportional to $\frac{1}{\lambda}\exp(-d_\mathrm{decay}/\lambda)$, where 
 
+$$d_\mathrm{decay} = \sqrt{1 - \rho^2\sin^2\theta} - \rho \cos \theta.$$
 
-{% include figure.html url="exponential_circle_geometry.png" 
-caption="Figure 1: Geometry for computing the intensity of deposition in a ring at radius $\rho$, from sources located outside the disk and which are absorbed in the disk with mean free path $\lambda$, by integrating over the central angle $\theta$." %}
-
-Actually, rather than integrate over $b$ and then somehow distribute that deposition to different radii $\rho$, we integrate over points with the same $\rho$ but different central angles $\theta$.
-
-Note that the figure shows only particles coming from one source angle $\phi$; I'll call the deposition intensity $\underline{i} \equiv i/2\pi$, where $i$ is the intensity from particles coming from all $\phi$ (but still in 2D) and $I$ would be the intensity in the 3D problem (including the effect of the polar angles).
-
-The reduced intensity of the deposition at a given radius $\rho$ is
-
-$$
-\begin{equation}
-\underline{i} = \frac{1}{\lambda}\frac{1}{2\pi\cancelcolor{\rho}}\int_0^{2\pi}\cancelcolor{\rho}\;d\theta\; \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right).
- \tag{1}\label{eq:one}
-\end{equation}
-$$
-
-I will explain this expression.
-The numerator of the quantity in the exponent has two terms.
-The $\sqrt{1-\rho^2\sin^2\theta}$ is the x-location of the right-hand edge of the circle, at the y-value $\rho \sin\theta$.
-The $\rho \cos\theta$ is the x-location of the point on the right at radius $\rho$. The difference between them is the thickness of material that particles from the direction $\phi$ need to travel through to get to the point on the ring.
 The leading $1/\lambda$ is the intensity of deposition from particles with mean free path $\lambda$.
 
-The $\color{midnightblue}{\rho}$ in the integral is the standard Jacobian for polar coordinates.
-The $1/2\pi\color{midnightblue}{\rho}$ outside the integral is because $\underline{i}$ is the deposition intensity (averaged over all angles); not the total deposition at that radius. The $2\pi\color{midnightblue}{\rho}$ is the circumference of the ring with radius $\rho$.
-
-Cancelling the $\color{midnightblue}{\rho}$, the reduced deposition intensity at a given radius is 
+Cancelling the $\cancelcolor{\rho}$, the intensity of deposition at a given radius $\rho$ is
 
 $$
 \begin{equation}
-\underline{i} = \frac{1}{2 \pi \lambda}\int_0^{2\pi}\;d\theta\; \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right).
- \tag{2}\label{eq:two}
+i = \frac{1}{\lambda}\frac{1}{2\pi}\int_0^{2\pi}d\theta\; \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right).
+ \tag{1}\label{eq:one}
 \end{equation}
 $$
 
@@ -82,17 +75,109 @@ f \equiv \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right
 \end{equation}
 $$
 
-so Equation \eqref{eq:two} can be expressed as
+so Equation \eqref{eq:one} can be expressed as
 
-$$ \underline{i} = \frac{1}{2\pi\lambda} \int_0^{2\pi} f\; d\theta.$$
+$$ 
+\begin{equation}
+i = \frac{1}{2\pi\lambda} \int_0^{2\pi} f\; d\theta.
+\tag{2}\label{eq:two}
+\end{equation}
+$$
+
+## The solution as a Taylor series
 
 Unfortunately, we cannot evaluate the integral in terms of elementary functions, or
 as far as I can tell, even in terms of complicated non-elementary functions like the Meijer-G function.
 
-Instead, I will find a Taylor series for $\underline{i}$ around $\rho=0$. 
-I will do this by expanding $f$ in a Taylor series and integrating each term.
+Instead, I found a Taylor series for $i$ around $\rho=0$. 
+I did this by expanding $f$ in a Taylor series and integrating each term.
 
-## Outline
+The expression is 
+
+$$
+
+\boxed{
+\begin{aligned}
+
+{i} &=
+\frac{e^{-1/\lambda}}{\pi}
+\sum_{\text{even}\;n \ge 0}
+\frac{\rho^n}{n! \gfour{(n/2)!}}
+\sum_{k=0}^{n-1}
+\frac{1}{\lambda^{n-k+1}}
+\sum_{c=\max(0,\,k-n/2)}^{k/2}
+\gone{(2k-2c-1)!!} \\
+&
+\gtwo{\frac{(k-2c)_{2c}}{2^c\,c!}}
+\gthree{\binom{n}{n+2c-2k}} 
+
+\gfour{\Gamma \left(\frac{1}{2}-c+k\right)
+\Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
+
+\end{aligned}
+}
+\tag{3}
+$$
+
+This will be derived in the section below.
+
+## The shape of ${i}$
+
+The cover image shows $f/\lambda$ as a function of $\theta$ for $\lambda=1/2$ (blue) and $\lambda=2$ (green).
+Figure 3 shows the ${i}$ that result from integrating over $\theta$.
+
+{% include figure.html url="exponential_circle_mfp_plot.png" 
+caption="Figure 3: 
+Plot of $i$ for $\lambda=1/9,\, 1/3,\, 1,$ and $3$.
+On the right, for $\lambda=1/3$ I also show
+the partial sums from Taylor series of order 2, 4, 8, and 16.
+The Taylor series converges much more quickly for higher $\lambda$.
+ "%} 
+
+### Special cases: center and edge
+For $\rho=0$ and $\rho=1$ the expression for $i$ can be directly integrated.
+The deposition intensity at the disk center is $i(\rho=0, \lambda) = \frac{1}{\lambda}\exp(-1/\lambda)$, which has a maximum of $e^{-1}$ at $\lambda=1$.
+
+The deposition intensity at the disk edge is 
+
+$$
+\begin{equation}
+i(\rho=1, \lambda) = \frac{1+\, _0\tilde{F}_1\left(;1;\frac{1}{\lambda
+   ^2}\right)-\pmb{L}_0\left(\frac{2}{\lambda }\right)}{2 \lambda }
+\tag{4}
+\end{equation}
+$$
+
+where $_0\tilde{F}_1$ is the regularized hypergeometric function and $\pmb{L}_0$ is the ever-popular modified Struve function.
+
+{% include figure.html url="exponential_disk_mfp_edge_intensity.png" 
+caption="Figure 4: 
+Plot of $i(\rho=1,\lambda)$ and its asymptotics.
+ "%} 
+
+At small $\lambda$, 
+
+$$i(\rho=1,\lambda) \approx \frac{1}{2\lambda}$$
+
+and at longer $\lambda$ it goes like
+
+$$i(\rho=1,\lambda) \approx \frac{1}{\lambda} - \frac{2}{\pi \lambda^2} + \frac{1}{2\lambda^3}.$$
+
+As a check I wrote a numerical simulation of particles (coming all from one angle).
+{% include figure.html url="exponential_disk_mfp_stippled.png" 
+caption="Figure 4: Numerical simulation (of particles from one angle) at various $\lambda$.
+
+ "%} 
+
+Here are the radii of the above points for $\lambda=1$. You can see significant scatter near the origin, even with xxx particles, showing the value of the analytical solution.
+{% include figure.html url="exponential_disk_mfp_numerical_check_particles.png" 
+caption="Figure 5: Numerical simulation and analytical solution.
+
+ "%} 
+ 
+
+
+## Outline of the derivation
 
 I will express $f$ as a Taylor series:
 
@@ -105,11 +190,11 @@ $$ j_n \equiv \left(\left.\frac{d}{d\rho^n}f\right)\right|_{\rho=0} .$$
 
 Then 
 
-$$\underline{i} = \frac{1}{2\pi\lambda} \int d\theta \sum_n j_n(\lambda,\theta) \frac{\rho^n}{n!}.$$
+$$i = \frac{1}{2\pi\lambda} \int d\theta \sum_n j_n(\lambda,\theta) \frac{\rho^n}{n!}.$$
 
-I reverse the order of the sum and integral (and move left the $\rho^n/n!$) to get a Taylor series for $\underline{i}$,
+I reverse the order of the sum and integral (and move left the $\rho^n/n!$) to get a Taylor series for $i$,
 
-$$\underline{i} = \frac{1}{2\pi\lambda} \sum_n\frac{\rho^n}{n!} l_n(\lambda)$$
+$$ i = \frac{1}{2\pi\lambda} \sum_n\frac{\rho^n}{n!} l_n(\lambda)$$
 
 where I'm defining
 
@@ -138,7 +223,7 @@ Taking repeated derivatives of $f$ with respect to $\rho$ yields sums of terms o
 $$
 \begin{equation}
 w\left(\frac{\rho^r \sin^{2s}\theta \cos^b\theta}{\lambda^g(1 - \rho^2 \sin^2\theta)^m}\right)f
-\tag{3}\label{eq:rsqform}
+\tag{5}\label{eq:rsqform}
 \end{equation}
 $$
 
@@ -180,7 +265,7 @@ f^{-1}\frac{d}{d\rho} \frac{\rho^r}{\left(1 - \rho^2 \sin^2 \right)^m} f &=
 &+ 2m\frac{\rho^{r+1}\sin^2}{(1 - \rho^2 \sin^2)^{m+1}}
 + r\frac{\rho^{r-1}}{(1 - \rho^2 \sin^2)^{m}}.
 \end{aligned}
-\tag{4}\label{eq:foursteps}
+\tag{6}\label{eq:foursteps}
 \end{equation}
 $$
 
@@ -231,7 +316,7 @@ The $n'th$ derivative is the sum of all permutations of length $n$ of $\{A,B,C,D
 $$
 \begin{equation}
 n = a + b + c + d
-\tag{5}\label{eq:nabcd}
+\tag{7}\label{eq:nabcd}
 \end{equation}
 $$
 
@@ -243,7 +328,7 @@ Therefore, any surviving term will have
 $$
 \begin{equation}
 a + c = d
-\tag{6}\label{eq:acd}
+\tag{8}\label{eq:acd}
 \end{equation}
 $$
 
@@ -258,7 +343,7 @@ If $n$ is odd, $(a + c +d) + b$ must be odd as well, so $b$ will be odd.
 Conversely, if $n$ is even $b$ will be even. 
 
 Therefore $l_n(\lambda)$ will be zero for all odd $n$.
-This means the Taylor series of $\underline{i}$ only has even powers of $\rho$!
+This means the Taylor series of $i$ only has even powers of $\rho$!
 
 Also, all the terms contributing to even $l_n$ will have $\sin^{2s}\cos^{b}$ with even $b$.
 
@@ -273,7 +358,7 @@ Thus,
 $$
 \begin{equation}
 n-k = a+b.
-\tag{7}\label{eq:nkab}
+\tag{9}\label{eq:nkab}
 \end{equation}
 $$
 
@@ -310,7 +395,7 @@ a &= k - 2c \\
 b &= n - 2k + 2c \\
 d &= k - c.
 \end{aligned}
-\tag{8}
+\tag{10}
 $$
 
 ### Weights of paths to get to a term
@@ -460,7 +545,6 @@ and
 
 $$
 
-\boxed{
 \begin{aligned}
 
 
@@ -478,7 +562,7 @@ l_n(\lambda) &=
 \Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
 
 \end{aligned}
-}
+
 $$
 
 I've moved the $\gfour{2/(n/2)!}$ out to the front because it does not depend on $k$ or $c$.
@@ -516,14 +600,19 @@ u_{n,k} &=
 \end{aligned}
 $$
 
-## Finally $\underline{i}$
+## Finally ${i}$
+Repeating the relation between $l_n$ and $i$,
+
+$$ i = \frac{1}{2\pi\lambda} \sum_n\frac{\rho^n}{n!} l_n(\lambda),$$
+
+we can finally construct $i$:
 
 $$
 
 \boxed{
 \begin{aligned}
 
-\underline{i} &=
+{i} &=
 \frac{e^{-1/\lambda}}{\pi}
 \sum_{\text{even}\;n \ge 0}
 \frac{\rho^n}{n! \gfour{(n/2)!}}
@@ -542,19 +631,7 @@ $$
 }
 $$
 
-Putting $l_n(\lambda)$ back into the formula for $\underline{i}$ I was able to combine the $\lambda$ with the others in the denominator and cancel a $2$.
-
-## The shape of $\underline{i}$
-
-The cover image shows $f/\lambda$ as a function of $\theta$ for $\lambda=1/2$ (blue) and $\lambda=2$ (green).
-Figure 3 shows the $\underline{i}$ that result from integrating over $\theta$.
-
-{% include figure.html url="exponential_circle_mfp_plot.png" 
-caption="Figure 3: 
-Plot of $\underline{i}$ for $\lambda=(1/2)$ and $2$. For $\lambda=(1/2)$ I also show
-the partial sums from Taylor series of order 2, 4, 8, and 16.
-The Taylor series converges much more quickly for higher $\lambda$.
- "%} 
+Putting $l_n(\lambda)$ back into the formula for ${i}$ I was able to combine the $\lambda$ with the others in the denominator and cancel a $2$.
 
 ## Postscript
 
