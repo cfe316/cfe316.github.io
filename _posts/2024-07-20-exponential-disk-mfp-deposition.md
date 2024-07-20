@@ -181,7 +181,7 @@ The rest of the post will derive the Taylor series expression for $i$.
 As a word of caution it is complex.
 Only read on if you really want to.
 
-## Outline of the derivation
+## 0. Outline of the derivation
 
 
 Equation (2), repeated here, is
