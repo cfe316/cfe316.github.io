@@ -101,11 +101,11 @@ $$
 \begin{aligned}
 
 {i} &=
-\frac{e^{-1/\lambda}}{\pi}
+\frac{e^{-1/\lambda}}{\pi\,\lambda}
 \sum_{\text{even}\;n \ge 0}
 \frac{\rho^n}{n! \gfour{(n/2)!}}
 \sum_{k=0}^{n-1}
-\frac{1}{\lambda^{n-k+1}}
+\frac{1}{\lambda^{n-k}}
 \sum_{c=\max(0,\,k-n/2)}^{k/2}
 \gone{(2k-2c-1)!!} \\
 &
@@ -185,12 +185,11 @@ Only read on if you really want to.
 ## 0. Outline of the derivation
 
 
-Equation (2), repeated here, is
+Equation \eqref{eq:two}, repeated here, is
 
 $$ 
 \begin{equation}
 i = \frac{1}{2\pi\lambda} \int_0^{2\pi} f\; d\theta
-\tag{2}
 \end{equation}
 $$
 
@@ -295,7 +294,7 @@ The four derivative steps:
 + 2m{r+1, m+1  , s+1, b  , g }    # C
 +  r{r-1, m    , s  , b  , g }    # D
 
-# These are in the same order as the terms in Eq (4).
+# These are in the same order as the terms in Eq (6).
 ```
 
 {% include margin-note.html id="2" content="
@@ -304,7 +303,7 @@ The base $f$ has $r=m=s=b=g=0$.
 
 I say _up to_ four new points because if $m=0$ (as in the base $f$) or if $r=0$ (also in the base $f$, and along paths where $r$ increased and then decreased to zero) then those terms will not be generated. I've labeled the four new points, or steps, as $A, B, C, D$.
 
-Here's a digram that shows this in action:
+Here's a diagram that shows this in action:
 
 
 {% include figure.html url="exponential_disk_derivatives_tree.svg" 
@@ -563,10 +562,8 @@ $$
 and
 
 $$
-
+\begin{equation}
 \begin{aligned}
-
-
 l_n(\lambda) &=
 \frac{\gfour{2} e^{-1/\lambda}} {\gfour{(n/2)!}}
 \sum_{k=0}^{n-1}
@@ -581,7 +578,8 @@ l_n(\lambda) &=
 \Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
 
 \end{aligned}
-
+\tag{11}\label{eq:lnlambda}
+\end{equation}
 $$
 
 I've moved the $\gfour{2/(n/2)!}$ out to the front because it does not depend on $k$ or $c$.
@@ -601,10 +599,8 @@ $$
 For completeness,
 
 $$
-
+\begin{equation}
 \begin{aligned}
-
-
 u_{n,k} &=
 \frac{\gfour{2}} {\pi \gfour{(n/2)!}}
 \sum_{c=\max(0,\,k-n/2)}^{k/2}
@@ -615,8 +611,9 @@ u_{n,k} &=
 
 \gfour{\Gamma \left(\frac{1}{2}-c+k\right)
 \Gamma \left(\frac{1}{2}+c-k+\frac{n}{2}\right)}.
-
 \end{aligned}
+\tag{12}\label{eq:unk}
+\end{equation}
 $$
 
 ## Finally ${i}$
@@ -632,11 +629,11 @@ $$
 \begin{aligned}
 
 {i} &=
-\frac{e^{-1/\lambda}}{\pi}
+\frac{e^{-1/\lambda}}{\pi\,\lambda}
 \sum_{\text{even}\;n \ge 0}
 \frac{\rho^n}{n! \gfour{(n/2)!}}
 \sum_{k=0}^{n-1}
-\frac{1}{\lambda^{n-k+1}}
+\frac{1}{\lambda^{n-k}}
 \sum_{c=\max(0,\,k-n/2)}^{k/2}
 \gone{(2k-2c-1)!!} \\
 &
