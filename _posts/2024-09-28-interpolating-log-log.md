@@ -12,9 +12,9 @@ In nuclear and atomic physics it's common to have data spanning many order of ma
 If we want to plot, integrate, or generally do calculations on the data, we usually need an interpolation scheme to generate values between the existing data points.
 The interpolation scheme one chooses affects the accuracy of the output data, but it can also have significant and *surprising* effects on important properties of the resulting function. This could lead to issues with numerical solvers or optimizers downstream.
 
-In this post I demonstrate the effects of four interpolation methods on some data that spans multiple order of magnitude in _x_ and _y_, specially, data on the cross section of the D-T fusion reaction as a function of energy. The interpolating functions are shown on a log-log plot.
+In this post I demonstrate the effects of four interpolation methods on some strictly positive data that spans multiple order of magnitude in _x_ and _y_, specially, data on the cross section of the D-T fusion reaction as a function of energy. The interpolating functions are shown on a log-log plot.
 
-* Standard 1D linear interpolation (blue) is the simplest, but the sharp transitions can cause issues with some numerical integrators, solvers, or gradient-based optimization schemes. In log-log space these linear segments look like rounded stair steps.
+* Standard 1D linear interpolation (blue) is the simplest, but the sharp transitions can cause issues with numerical integrators, solvers, or gradient-based optimization schemes. In log-log space these linear segments look like rounded stair steps.
 * Standard cubic interpolation (orange) produces a smooth curve, but the resulting interpolating curve has two _new_ bad features: first, even though the x and y data each are strictly increasing functions (in this region of the plot) with positive slopes, the resulting curve has a *negative slope* near 2 keV, in the center of the plot. This could trip up a gradient-based optimizer. Even worse, the function starts to oscillate between positive and **negative values** below 1 keV, even though all the data points have positive $y$.
 
 The stair-step shape and the unexpected negative values and slope are eliminated by performing the interpolation in log-log space.
@@ -28,16 +28,18 @@ $$ y_\mathrm{new}=\exp\left(\mathrm{interp}_{(\log(x), \log(y))}(\log(x_\mathrm{
 3. Do interpolation (linear, cubic, or otherwise) on these log-space values to get $\log(y_\mathrm{new})$.
 4. Exponentiate to get the final $y_\mathrm{new}$.
 
-* The green curve shows linear interpolation in log-log space. This is a very good fit to the data when viewed in log-log space, but the sharp transitions between segments can still cause some issues.
+This only works on data with strictly positive *x* and *y*, since $\log$ is undefined for zero or negative arguments.
+
+* The green curve shows linear interpolation in log-log space. This is a very good fit to the data when viewed in log-log space, but the sharp transitions between segments can still cause issues.
 * The red surve is cubic interpolation in log-log space. This is the nicest function! It'll have good derivatives everywhere.
 
 ## Wrapping up, lessons learned
 
-Standard interpolation is fine for data all on the same order of magnitude,
-but for data spanning **many** orders of magnitude, 
+Standard (linear-space) interpolation is probably fine for data all on the same order of magnitude,
+but for strictly positive data spanning **many** orders of magnitude, 
 cubic interpolation in log-log space yields nice, smooth functions.
 
-* Always plot your functions! I did not expect standard cubic interpolation to have the problems with ringing and negatives.
+Finally, always plot your functions! I did not expect standard cubic interpolation to have the problems with ringing and negative values.
 
 ### Wait, what about back in linear space
 
