@@ -13,7 +13,7 @@ When particles enter the cylinder region, they are absorbed with some mean free 
 I provide an expression for the radial profile of absorption (deposition) intensity $d(\rho, \lambda)$
 
 This this the third and hopefully final post in a series.
-The previous two examined 2D version of this geometry, a disk in a plane, and calculated the fraction of particles that survive crossing the disk, and the radial profile of the deposition intensity.
+The previous two examined 2D version of this geometry---a disk in a plane---and calculated the fraction of particles that survive crossing the disk, and the radial profile of the deposition intensity.
 
 $$
 \newcommand{\cancelcolor}[1]{\color{midnightblue}{#1}}
@@ -66,6 +66,10 @@ The bad news is, I have not found a nice form for the deposition profile $d(\rho
 
 {% include figure.html url="exponential_disk_mfp_detailed_geometry.svg" 
 caption="Figure 1: Geometry detail for the decay distance as a function of $\theta$. At this stage, the integral has been rearranged so that all particles come from the right side of the disk.
+ "%} 
+
+{% include figure.html url="sin_and_sinsq.svg" 
+caption="Figure 2: Vertical angle integral.
  "%} 
 
 For particles coming from a fixed $\phi$, the deposition at the point given by $(\rho, \theta)$ is proportional to $\frac{1}{\lambda}\exp(-d_\mathrm{decay}/\lambda)$, where 
