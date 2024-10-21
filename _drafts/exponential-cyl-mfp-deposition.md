@@ -38,45 +38,51 @@ For the sake of completeness
 
 
 ## Problem background and setup
-### Background gas
-Assume the background density of particles is $1$ per unit length squared and all particles move at a speed of $1$ unit length per unit time.
-The one-way flux across a unit-length line segment is $\left(\int_{-\pi/2}^{\pi/2} 1 * 1 * \cos\phi\;d\phi\right)/ \left(\int_{-\pi}^{\pi}\;d\phi\right) = 1/\pi$ per unit time, where $\phi$ is the direction of particle motion.
-Since the disk has circumference of $2\pi$ the rate of particles entering the disk is $2$ per unit time.
-
-### Setup for integration
-I want to find the intensity of deposition at a given radius $\rho$.
-This is the total deposition per unit time in the annulus of radius $\rho$ and width $d\rho$ summed over all central angles $\theta$, divided by the annulus area of $2\pi\rho\,d\rho$.
-
-The deposition intensity is
-
-$$ i(\rho, \lambda) = \frac{\int_{\phi=0}^{2\pi}d\phi \int_{\theta=0}^{2\pi}\cancelcolor{\rho}\, d\theta\,y(\phi,\theta, \rho, \lambda)\,d\rho}{2\pi\cancelcolor{\rho} \,d\rho} $$
-
-where $y(\phi, \theta, \rho, \lambda)$ is the deposition intensity from particles moving at angle $\phi$, at radius $\rho$ and central angle $\theta$.
-The $\cancelcolor{\rho}$ in the numerator is the standard Jacobian of polar coordinates. 
-This will cancel with the $\cancelcolor{\rho}$ in the denominator; the $d\rho$s also cancel.
-
-By symmetry, the radial intensity from all angles $\phi$ is the same;
-thus we can consider an equivalent scenario where all particles come from the same direction, but with $2\pi$ times the intensity.
-The cover illustration shows all particles entering from the right, with $\phi=\pi$.
-
-<!---
-The bad news is, I have not found a nice form for the deposition profile $d(\rho, \lambda)$.
-(I've since found the 1977 paper by Michael Milgram [On the properties of collision probability integrals in annular geometry](https://pubs.aip.org/jmp/article/18/12/2456/225431/On-the-properties-of-collision-probability), which I'm working through.)
--->
-
-{% include figure.html url="exponential_disk_mfp_detailed_geometry.svg" 
-caption="Figure 1: Geometry detail for the decay distance as a function of $\theta$. At this stage, the integral has been rearranged so that all particles come from the right side of the disk.
- "%} 
+### Background gas, rate of particles entering cylinder
+Assume the background density of particles is $\gone{1}$ per unit length squared and all particles move at a speed of $\gtwo{1}$ unit length per unit time.
+The one-way flux across a unit area with a horizontal normal is $\left(\int_0^\pi \sin^2\beta \; d\beta \int_{-\pi/2}^{\pi/2} \gone{1} * \gtwo{1} * \cos\phi\;d\phi\right)/ \left(\int_0^{\pi}\sin\beta \int_{-\pi}^{\pi}\;d\phi\right) = 1/4$ per unit time,
+where $\phi$ is the azimuthal angle and $\beta$ is the angle from the pole. 
 
 {% include figure.html url="sin_and_sinsq.svg" 
 caption="Figure 2: Vertical angle integral.
  "%} 
 
-For particles coming from a fixed $\phi$, the deposition at the point given by $(\rho, \theta)$ is proportional to $\frac{1}{\lambda}\exp(-d_\mathrm{decay}/\lambda)$, where 
+In the numerator's integral over $\beta$, one factor of $\sin\beta$ is the standard Jacobian of polar coordinates, and the other accounts for how particles traveling at $\beta$ near $\pi/2$ have a higher horizontal velocity and are more likely to pass through a surface with a horizontal normal.
 
-$$d_\mathrm{decay} = \sqrt{1 - \rho^2\sin^2\theta} - \rho \cos \theta.$$
+Since the cylinder has an area of $2\pi$ per unit length, the rate of particles entering the cylinder is $\pi/2$ per unit time.
 
-The leading $1/\lambda$ is the intensity of deposition from particles with mean free path $\lambda$.
+### Setup for integration
+I want to find the intensity of deposition at a given radius $\rho$.
+This is the total deposition per unit length and per unit time in the cylindrical shell of radius $\rho$ and width $d\rho$, summed over all central angles $\theta$, divided by the annulus area of $2\pi\rho\,d\rho$.
+
+The deposition intensity is
+
+$$ i(\rho, \lambda) = \frac{\int_{\phi=0}^{2\pi}d\phi \int_0^{\pi}\sin^2\beta\,d\beta\, \int_{\theta=0}^{2\pi}\cancelcolor{\rho}\, d\theta\,y(\phi,\beta,\theta, \rho, \lambda)\,d\rho}{2\pi\cancelcolor{\rho} \,d\rho} $$
+
+where $y(\phi, \beta, \theta, \rho, \lambda)$ is the deposition intensity from particles moving at horizontal angle $\phi$, angle from the pole $\beta$, at radius $\rho$ and central angle $\theta$.
+The $\cancelcolor{\rho}$ in the numerator is the standard Jacobian of polar coordinates. 
+This will cancel with the $\cancelcolor{\rho}$ in the denominator; the $d\rho$s also cancel.
+
+By symmetry, the radial intensity from all angles $\phi$ is the same;
+thus we can consider an equivalent scenario where all particles come from the same direction, but with $2\pi$ times the intensity.
+
+<!---
+The cover illustration shows all particles entering from the right, with $\phi=\pi$.
+--->
+<!---
+The bad news is, I have not found a nice form for the deposition profile $d(\rho, \lambda)$.
+(I've since found the 1977 paper by Michael Milgram [On the properties of collision probability integrals in annular geometry](https://pubs.aip.org/jmp/article/18/12/2456/225431/On-the-properties-of-collision-probability), which I'm working through.)
+-->
+
+{% include figure.html url="exponential_cylinder_mfp_detailed_geometry.svg" 
+caption="Figure 1: Geometry detail for the decay distance as a function of $\theta$. At this stage, the integral has been rearranged so that all particles come from the right side of the disk.
+ "%} 
+
+For particles coming from a fixed $\phi$ and $\beta$, the deposition at the point given by $(\rho, \theta)$ is proportional to $\frac{1}{\lambda \sin\beta}\exp(-d_\mathrm{decay}/\lambda)$, where 
+
+$$d_\mathrm{decay} = (\sqrt{1 - \rho^2\sin^2\theta} - \rho \cos \theta)/\sin\beta.$$
+
+The leading $1/(\lambda\sin\beta)$ is the intensity of deposition from particles with mean free path $\lambda$ combined with the fact that particles travel across the cylinder at a speed proportional to $1/\sin\beta$.
 
 Cancelling the $\cancelcolor{\rho}$, the intensity of deposition at a given radius $\rho$ is
 
