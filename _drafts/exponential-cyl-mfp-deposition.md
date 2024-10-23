@@ -57,14 +57,14 @@ This is the total deposition per unit length and per unit time in the cylindrica
 
 The deposition intensity is
 
-$$ i(\rho, \lambda) = \frac{\int_{\phi=0}^{2\pi}d\phi \int_0^{\pi}\sin^2\beta\,d\beta\, \int_{\theta=0}^{2\pi}\cancelcolor{\rho}\, d\theta\,y(\phi,\beta,\theta, \rho, \lambda)\,d\rho}{2\pi\cancelcolor{\rho} \,d\rho} $$
+$$ i(\rho, \lambda) = \frac{\int_{\phi=0}^{2\pi}d\phi \int_{\beta=0}^{\pi}\sin^2\beta\,d\beta\, \int_{\theta=0}^{2\pi}\cancelcolor{\rho}\, d\theta\,y(\phi,\beta,\theta, \rho, \lambda)\,d\rho}{2\pi\cancelcolor{\rho} \,d\rho} $$
 
 where $y(\phi, \beta, \theta, \rho, \lambda)$ is the deposition intensity from particles moving at horizontal angle $\phi$, angle from the pole $\beta$, at radius $\rho$ and central angle $\theta$.
 The $\cancelcolor{\rho}$ in the numerator is the standard Jacobian of polar coordinates. 
 This will cancel with the $\cancelcolor{\rho}$ in the denominator; the $d\rho$s also cancel.
 
-By symmetry, the radial intensity from all angles $\phi$ is the same;
-thus we can consider an equivalent scenario where all particles come from the same direction, but with $2\pi$ times the intensity.
+By symmetry, and to resolve the integral over $\phi$, we note that the radial intensity from all angles $\phi$ is the same;
+thus we can consider an equivalent scenario where all particles come from the same direction, but with $2\pi$ times the intensity: $y'(\beta, \theta, \rho, \lambda) = 2\pi\,y(\phi, \beta, \theta, \rho, \lambda)$.
 
 <!---
 The cover illustration shows all particles entering from the right, with $\phi=\pi$.
@@ -78,9 +78,9 @@ The bad news is, I have not found a nice form for the deposition profile $d(\rho
 caption="Figure 1: Geometry detail for the decay distance as a function of $\theta$. At this stage, the integral has been rearranged so that all particles come from the right side of the disk.
  "%} 
 
-For particles coming from a fixed $\phi$ and $\beta$, the deposition at the point given by $(\rho, \theta)$ is proportional to $\frac{1}{\lambda \sin\beta}\exp(-d_\mathrm{decay}/\lambda)$, where 
+For particles coming from a now-fixed $\phi$ and $\beta$, the deposition at the point given by $(\rho, \theta)$ is proportional to $\frac{1}{\lambda \sin\beta}\exp(-d_\mathrm{decay}/\lambda)$, where 
 
-$$d_\mathrm{decay} = (\sqrt{1 - \rho^2\sin^2\theta} - \rho \cos \theta)/\sin\beta.$$
+$$d_\mathrm{decay} = \left(\sqrt{1 - \rho^2\sin^2\theta} - \rho \cos \theta\right)/\sin\beta.$$
 
 The leading $1/(\lambda\sin\beta)$ is the intensity of deposition from particles with mean free path $\lambda$ combined with the fact that particles travel across the cylinder at a speed proportional to $1/\sin\beta$.
 
@@ -88,7 +88,7 @@ Cancelling the $\cancelcolor{\rho}$, the intensity of deposition at a given radi
 
 $$
 \begin{equation}
-i = \frac{1}{\lambda}\frac{1}{2\pi}\int_0^{2\pi}d\theta\; \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right).
+i = \frac{1}{2\pi}\int_{0}^{\pi}\,d\beta \sin^2 \beta \int_0^{2\pi}d\theta\; \frac{1}{\lambda \sin \beta} e^{-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda \sin\beta}.
  \tag{1}\label{eq:one}
 \end{equation}
 $$
@@ -97,7 +97,7 @@ For brevity I will define
 
 $$
 \begin{equation}
-f \equiv \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda\right)
+f \equiv \exp\left(-\left(\sqrt{1 - \rho^2 \sin^2\theta} - \rho \cos\theta\right)/\lambda \sin \beta\right)
 \end{equation}
 $$
 
@@ -105,10 +105,12 @@ so Equation \eqref{eq:one} can be expressed as
 
 $$ 
 \begin{equation}
-i = \frac{1}{2\pi\lambda} \int_0^{2\pi} f\; d\theta.
+i = \int_{\beta=0}^\pi d\beta\,\sin^2\beta \frac{1}{2\pi\lambda \sin \beta} \int_0^{2\pi} f\; d\theta.
 \tag{2}\label{eq:two}
 \end{equation}
 $$
+
+This is essentially the same as Equation (2) of the earlier post, but inside an integral over $\beta$.
 
 ## The solution as a Taylor series
 
