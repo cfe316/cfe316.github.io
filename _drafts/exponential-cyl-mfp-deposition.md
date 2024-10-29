@@ -232,12 +232,10 @@ The Taylor series converges much more quickly for higher $\lambda$.
 As $\rho \to 0$ the deposition intensity becomes
 
 $$
-i(\rho \to 0, \lambda) =
-\frac{\pi K_0\left(\frac{1}{\lambda }\right) \pmb{L}_{-1}\left(\frac{1}{\lambda }\right)+K_1\left(\frac{1}{\lambda }\right) \left(2 \lambda + \pi 
-   \pmb{L}_0\left(\frac{1}{\lambda }\right)\right)-\pi \lambda}{2 \lambda^3}
+i(\rho \to 0, \lambda) = \frac{1}{\lambda}\mathrm{Ki}_2\left(\frac{1}{\lambda}\right)
 $$
 
 This function has a broad maximum around $\lambda = 1.21979$ with a value of 0.278937.
 At large $\lambda$ this function asymptotes to $1/\lambda - \pi/(2\lambda^2)$.
 
-As $\rho \to 1$ the function curls up with sharp edge.
+As $\rho \to 1$ the function curls up with sharp edge to a finite value.
