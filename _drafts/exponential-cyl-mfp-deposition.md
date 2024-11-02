@@ -12,7 +12,7 @@ An infinite cylinder of radius $1$ is surrounded by a uniform, isotropic, collis
 When particles enter the cylinder region, they are absorbed with some mean free path $\lambda$.
 I provide an expression for the radial profile of absorption (deposition) intensity $i(\rho, \lambda)$
 
-This is the third and post in a series.
+This is the third post in a series.
 The 
 [previous]({% post_url 2024-07-18-exponential-disk-mfp-passage %})
 [two]({% post_url 2024-07-20-exponential-disk-mfp-deposition %})
