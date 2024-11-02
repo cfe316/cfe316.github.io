@@ -67,7 +67,7 @@ We resolve the integral over $\phi$ by symmetry: after averaging over the cylind
 
 $$\int_0^{2\pi}\,d\theta\int_0^{2\pi} \,d\phi\, y(\phi, \theta, ...) = 2\pi\, \int_0^{2\pi}\, d\theta\, y(\phi=\pi, \theta, ...)$$
 
-where I've chosen $\phi=\pi$ to align with the image of particles moving leftward into a cross section of the cylinder.
+where I've chosen $\phi=\pi$ to align with the image (Figure 1) of particles moving leftward into a cross section of the cylinder.
 
 Thus, cancelling a $2\pi$ and the $\rho$ and $d\rho$, and combining the two $\sin\beta$ terms,
 
@@ -335,7 +335,7 @@ Deposition patterns shown on cross sections of the cylinder.
 
 {% include figure.html url="exponential_cyl_mfp_asymptotes_plot.svg" 
 caption="Figure 4: 
-Plots of $i$ as a function of $\lambda$ at $\rho=1$ (blue) and $\rho=0$ (orange) and their asymptotes at small and large $\lambda$.
+Plots of $i$ as a function of $\lambda$ at the edge (blue) and the center (orange), and their asymptotes at small and large $\lambda$.
  "%} 
 
 #### At the cylinder edge
@@ -375,7 +375,7 @@ where $\gamma$ is Euler's gamma constant.
 At $\rho = 0$ the deposition intensity becomes
 
 $$
-i(0, \lambda) = \frac{1}{\lambda}\mathrm{Ki}_2\left(\frac{1}{\lambda}\right)
+i(0, \lambda) = \frac{1}{\lambda}\mathrm{Ki}_2\left(\frac{1}{\lambda}\right).
 $$
 
 This function has a broad maximum around $\lambda = 1.21979$ with a value of 0.278937.
@@ -391,7 +391,11 @@ $$\frac{1}{\lambda}
 
 ## Future work
 
-In this post I constructed a Taylor series around $\rho=0$.
+In this post I derived a solution in the form of a Taylor series around $\rho=0$.
 This works well near the center of the cylinder, but 
-as $\rho \to 1$ the function curls up with sharp edge (the derivative goes to infinity) to a finite value given by Expression (6) above.
+as $\rho \to 1$ the function curls up to a finite value (Expression (6)) with a sharp edge (the radial derivative goes to infinity).
 It would be interesting to explore the _radial_ behavior as $\rho \to 1$ at fixed $\lambda$.
+
+## Acknowledgements
+
+Thanks to J. Parisi for his encouragement of my pursuit of these expressions!
