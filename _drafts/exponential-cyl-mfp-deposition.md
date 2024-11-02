@@ -3,7 +3,7 @@ layout: post
 title: "Radial profiles of deposition in a cylinder"
 author: "Jacob Schwartz"
 categories: journal
-image: exponential_disk_mfp_geometry.svg
+image: exponential_cylinder_mfp_illustration.svg
 tags: [integration,mean free path]
 use_math: true
 ---
@@ -12,7 +12,7 @@ An infinite cylinder of radius $1$ is surrounded by a uniform, isotropic, collis
 When particles enter the cylinder region, they are absorbed with some mean free path $\lambda$.
 I provide an expression for the radial profile of absorption (deposition) intensity $i(\rho, \lambda)$
 
-This this the third and hopefully final post in a series.
+This is the third and post in a series.
 The 
 [previous]({% post_url 2024-07-18-exponential-disk-mfp-passage %})
 [two]({% post_url 2024-07-20-exponential-disk-mfp-deposition %})
@@ -227,15 +227,171 @@ the partial sums from Taylor series of order 2, 4, 8, and 16.
 The Taylor series converges much more quickly for higher $\lambda$.
  "%} 
 
-### Special cases: center and edge
+Figure 3 shows the results of a numerical simulation[^numerical] at three values of $\lambda$.
 
-As $\rho \to 0$ the deposition intensity becomes
+{% include figure.html url="exponential_cyl_mfp_3_disks_stippled.png" 
+caption="Figure 3: 
+Deposition patterns shown on cross sections of the cylinder.
+ "%} 
+
+[^numerical]:I used this python code to generate the stippled-disc plots.
+    ```
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    def sample_sinsquared(n_samples):
+        """Uses symmetry to get one variate per random number"""
+        x = np.pi/2 * np.random.rand(n_samples)
+        y = np.random.rand(n_samples)
+        sinsq = np.sin(x)**2
+        flip = sinsq < y
+        x[flip] = np.pi/2 + x[flip]
+        return x
+    
+    def random_beta(n_samples):
+        """Returns a sin^2 distribution between 0 and pi/2
+        """
+        return sample_sinsquared(n_samples)
+    
+    def random_b(n):
+        """Impact factor between -1 and 1"""
+        return -1 + 2 * np.random.rand(n)
+    
+    def random_length(n, mfp):
+        """Particle survival length. May exceed path length through cyl"""
+        return -mfp * np.log(np.random.rand(n))
+    
+    def max_x_length_b(b):
+        """Horizontal distance across the circle at impact factor b"""
+        return 2*np.sqrt(1-b**2)
+    
+    def max_acceptable_distance(b, beta):
+        """3D length across the cylinder at impact factor b, angle β"""
+        return max_x_length_b(b) / np.sin(beta)
+    
+    def end_x(b, xlength):
+        """Final x loc for impact factor and survival length"""
+        x0 = -np.sqrt(1 - b**2)
+        return x0 + xlength
+    
+    def deporadius(*, b, beta, mfp):
+        """Evaluate sample directions"""
+        edgedistance = max_acceptable_distance(b, beta)
+        n_samples = len(b)
+        depodistance = random_length(n_samples, mfp)
+            
+        depo_x = np.sqrt(1 - b**2) - depodistance * np.sin(beta)
+        depo_y = b
+    
+        depo_r = np.sqrt(depo_x**2 + depo_y**2)
+        good = edgedistance > depodistance
+    
+        return depo_x[good], depo_y[good], depo_r[good]
+    
+    ############### Draw figure ################
+
+    def drawcircle(ax, radius, **kwargs):
+        θ = np.linspace(0,2*np.pi, num=360)
+        x = radius * np.cos(θ)
+        y = radius * np.sin(θ)
+        ax.plot(x, y, **kwargs)
+
+    fig, axx = plt.subplots(1,3, figsize=(7,4))
+    
+    for ax in axx:
+        drawcircle(ax, 1, color='black', lw=0.5)
+        for r in np.linspace(0.1,0.9, num=9):
+            drawcircle(ax, r, color='gray', lw=0.5,zorder=-999)
+    
+        for side in ['top', 'bottom', 'left', 'right']:
+            ax.spines[side].set_visible(False)
+    
+        ax.set(xticks=[], yticks=[])
+        ax.set_aspect(1)
+        ax.set(xlim=[-1.01,1.01], ylim=[-1.01,1.01])
+    
+    mycolor = "#00000040"
+    for ax, mfp in zip(axx, [1/9, 1/3, 1]):
+        n_samples = 40_000
+        b = random_b(n_samples)
+        beta = random_beta(n_samples)
+        x, y, dr = deporadius(b=b, beta=beta, mfp=mfp)
+
+        # all particles come in from the right side.
+        # here, spin them around the disk to a random angle.
+        random_phi = 2*np.pi * np.random.rand(len(dr))
+        ax.scatter(dr * np.cos(random_phi), dr * np.sin(random_phi),
+                   1, color=mycolor, marker='.', edgecolors='none', facecolors=None)
+    
+    axx[0].text(0,-1.05,'$\lambda = 1/9$', verticalalignment='top', ha='center', size=14)
+    axx[1].text(0,-1.05,'$\lambda = 1/3$', verticalalignment='top', ha='center', size=14)
+    axx[2].text(0,-1.05,'$\lambda = 1$', verticalalignment='top', ha='center', size=14)
+    
+    plt.tight_layout()
+    plt.show()
+    ```
+
+### Special cases: intensity at the edge and center
+
+{% include figure.html url="exponential_cyl_mfp_asymptotes_plot.svg" 
+caption="Figure 4: 
+Plots of $i$ as a function of $\lambda$ at $\rho=1$ (blue) and $\rho=0$ (orange) and their asymptotes at small and large $\lambda$.
+ "%} 
+
+#### At the cylinder edge
+At $\rho=1$ the intensity reaches a value of
 
 $$
-i(\rho \to 0, \lambda) = \frac{1}{\lambda}\mathrm{Ki}_2\left(\frac{1}{\lambda}\right)
+\begin{equation}
+i(1, \lambda) = \frac{1}{2\lambda} + \frac{\pi ^{3/2}}{4\lambda} G_{2,4}^{2,0}\left(\frac{1}{\lambda ^2}\Bigg|
+\begin{array}{c}
+ \frac{1}{2},\frac{3}{2} \\
+ 0,1,0,\frac{1}{2} \\
+\end{array}
+\right)-\frac{1}{\lambda ^2}.
+\tag{6}\label{eq:edgeintensity}
+\end{equation}
+$$
+
+This edge intensity is finite for any positive $\lambda$.
+At small $\lambda$ the leading $1/2\lambda$ term dominates and the function tends toward a value of, from what I can tell numerically, is like $1/(2\lambda) + 1/8$.
+Annoyingly I can't prove the value $1/8$ is correct analytically.
+I'm unsure how to formally analyze Expression (6) in the small-$\lambda$ limit.
+The Meijer-G function and $-1/\lambda^2$ are the two leading terms but _nearly_ cancel, leaving a difference very close to $1/8$.
+
+At large $\lambda$ the intensity at the edge asymptotes to 
+
+$$
+\frac{1}{\lambda }
+-\frac{1}{\lambda ^2}
++\frac{2-2 \gamma +\log (4)+2 \log (\lambda )}{4 \lambda ^3}
+$$
+
+where $\gamma$ is Euler's gamma constant.
+
+
+#### At the cylinder center
+
+At $\rho = 0$ the deposition intensity becomes
+
+$$
+i(0, \lambda) = \frac{1}{\lambda}\mathrm{Ki}_2\left(\frac{1}{\lambda}\right)
 $$
 
 This function has a broad maximum around $\lambda = 1.21979$ with a value of 0.278937.
-At large $\lambda$ this function asymptotes to $1/\lambda - \pi/(2\lambda^2)$.
 
-As $\rho \to 1$ the function curls up with sharp edge to a finite value.
+At small $\lambda$ this goes like $\sqrt{\frac{\pi }{2}} e^{-1/\lambda }/\sqrt{\lambda }$, shown with the orange dotted line.
+
+At $\lambda \gg 1$ it asymptotes to
+
+$$\frac{1}{\lambda}
+-\frac{\pi }{2 \lambda ^2}
++\frac{3-2 \gamma +\log (4)+2 \log(\lambda)}{4 \lambda ^3}.$$
+
+
+## Future work
+
+In this post I constructed a Taylor series around $\rho=0$.
+This works well near the center of the cylinder, but 
+as $\rho \to 1$ the function curls up with sharp edge (the derivative goes to infinity) to a finite value given by Expression (6) above.
+It would be interesting to explore the _radial_ behavior as $\rho \to 1$ at fixed $\lambda$.
