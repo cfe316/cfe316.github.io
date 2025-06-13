@@ -50,11 +50,11 @@ This integral can be solved using the substitution $u \equiv \cos \theta$, and
 
 $$
 \begin{split}
-\Gamma_n = \frac{2 \rho +(1-\rho ) E(\phi_\mathrm{in}|m_\mathrm{in})-(1+\rho ) F(\phi_\mathrm{in}|m_\mathrm{in})}{\rho  (1+\rho )}
+\Gamma_n = \frac{2 \rho +(1-\rho ) E(\phi_\mathrm{in}/2|m_\mathrm{in})-(1+\rho ) F(\phi_\mathrm{in}/2|m_\mathrm{in})}{\rho  (1+\rho )}
 \end{split}
 $$
 
-where $\phi_\mathrm{in} = \arccos(\rho)/2$ and $m_\mathrm{in} = -4\rho/(1-\rho)^2$.
+where $\phi_\mathrm{in} = \arccos(\rho)$ and $m_\mathrm{in} = -4\rho/(1-\rho)^2$.
 
 {::comment}
 Previously this was:
@@ -98,7 +98,7 @@ The result is
 
 $$
 \begin{split}
-\Gamma_n = \frac{1-\rho}{P(P^2 - 1)} \left[2 \rho +  (P-1) E\left(\phi\vert m\right)+(1+P) F\left(\phi \vert m\right)\right]
+\Gamma_n = \frac{1-\rho}{P(P^2 - 1)} \left[2 \rho +  (P-1) E\left(\phi/2\vert m\right)+(1+P) F\left(\phi/2 \vert m\right)\right]
 \end{split}
 $$
 
