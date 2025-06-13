@@ -82,12 +82,9 @@ $$
 
 The computation for outboard wall flux is similar except that $\theta_\mathrm{max}$ depends on both $\rho$ and $P$:
 
-$$\theta_\mathrm{max} = \arctan\left(\rho ^2-\sqrt{\left(\rho ^2-1\right) \left(\rho ^2-P^2\right)},\rho  \left(\sqrt{P^2-\rho
-   ^2}+\sqrt{1-\rho ^2}\right)\right),$$
-
 $$\theta_\mathrm{max} = \arccos\left(\frac{\rho}{1}\right) + \arccos\left(\frac{\rho}{P})$$
 
-where $\arctan$ takes arguments in the order $(x, y)$. The maximum $\theta$ occurs when the source becomes hidden by the center stack.
+The maximum $\theta$ occurs when the source becomes hidden by the center stack.
 The formula for distance is $d^2 = R^2 (1 + P^2 - 2 P \cos\theta) $ and $\cos(\psi(\theta)) = (P - \cos\theta)/((P - \cos\theta)^2 + \sin^2\theta )$.
 
 $$
