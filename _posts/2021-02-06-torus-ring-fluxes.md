@@ -50,7 +50,7 @@ This integral can be solved using the substitution $u \equiv \cos \theta$, and
 
 $$
 \begin{split}
-\Gamma_n = \frac{2 \rho +(1-\rho ) E(\phi_\mathrm{in}/2|m_\mathrm{in})-(1+\rho ) F(\phi_\mathrm{in}/2|m_\mathrm{in})}{\rho  (1+\rho )}
+\Gamma_n = \frac{2 \rho +(1-\rho ) E(\phi_\mathrm{in}/2\,|m_\mathrm{in})-(1+\rho ) F(\phi_\mathrm{in}/2\,|m_\mathrm{in})}{\rho  (1+\rho )}
 \end{split}
 $$
 
@@ -82,7 +82,7 @@ $$
 
 The computation for outboard wall flux is similar except that $\theta_\mathrm{max}$ depends on both $\rho$ and $P$:
 
-$$\theta_\mathrm{max} = \arccos\left(\frac{\rho}{1}\right) + \arccos\left(\frac{\rho}{P})$$
+$$\theta_\mathrm{max} = \arccos\left(\frac{\rho}{1}\right) + \arccos\left(\frac{\rho}{P}\right)$$
 
 The maximum $\theta$ occurs when the source becomes hidden by the center stack.
 The formula for distance is $d^2 = R^2 (1 + P^2 - 2 P \cos\theta) $ and $\cos(\psi(\theta)) = (P - \cos\theta)/((P - \cos\theta)^2 + \sin^2\theta )$.
@@ -97,7 +97,7 @@ The result is
 
 $$
 \begin{split}
-\Gamma_n = \frac{1-\rho}{P(P^2 - 1)} \left[2 \rho +  (P-1) E\left(\phi/2\vert m\right)+(1+P) F\left(\phi/2 \vert m\right)\right]
+\Gamma_n = \frac{1-\rho}{P(P^2 - 1)} \left[2 \rho +  (P-1) E\left(\phi/2\,\vert m\right)+(1+P) F\left(\phi/2\,\vert m\right)\right]
 \end{split}
 $$
 
