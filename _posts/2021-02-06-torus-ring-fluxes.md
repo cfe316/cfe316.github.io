@@ -98,11 +98,12 @@ The result is
 
 $$
 \begin{split}
-\Gamma_n = \frac{1-\rho}{P(P^2 - 1)} \left[ (P-1) E\left(\phi\vert m\right)+2 \rho (1+P) F\left(\phi \vert m\right)\right]
+\Gamma_n = \frac{1-\rho}{P(P^2 - 1)} \left[2 \rho +  (P-1) E\left(\phi\vert m\right)+(1+P) F\left(\phi \vert m\right)\right]
 \end{split}
 $$
 
-where $E$ and $F$ are the elliptic integrals of the second and first kinds, respectively, $\phi = \arcsin\left(\sqrt{\frac{-\rho ^2+P+\sqrt{\left(-1+\rho ^2\right) (\rho -P) (\rho +P)}}{2 P}}\right)$
+where $E$ and $F$ are the elliptic integrals of the second and first kinds, respectively,
+$\phi = \arccos(\rho) + \arccos(\rho/P)$
 and $m = -4 P / (P-1)^2$.
 
 ## Comparison of the two
